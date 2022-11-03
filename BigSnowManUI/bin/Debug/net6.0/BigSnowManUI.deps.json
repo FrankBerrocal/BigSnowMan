@@ -1,0 +1,72 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "BigSnowManUI/1.0.0": {
+        "dependencies": {
+          "BigSnowManLibrary": "1.0.0",
+          "Dapper": "2.0.123",
+          "Serilog": "2.12.1-dev-01587"
+        },
+        "runtime": {
+          "BigSnowManUI.dll": {}
+        }
+      },
+      "Dapper/2.0.123": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.123.33578"
+          }
+        }
+      },
+      "Serilog/2.12.1-dev-01587": {
+        "runtime": {
+          "lib/net6.0/Serilog.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.12.1.0"
+          }
+        }
+      },
+      "BigSnowManLibrary/1.0.0": {
+        "dependencies": {
+          "Dapper": "2.0.123",
+          "Serilog": "2.12.1-dev-01587"
+        },
+        "runtime": {
+          "BigSnowManLibrary.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BigSnowManUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dapper/2.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "path": "dapper/2.0.123",
+      "hashPath": "dapper.2.0.123.nupkg.sha512"
+    },
+    "Serilog/2.12.1-dev-01587": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PzLed+pR9Xb+Vv7WnA0OpIodmgK8vNxDgPo6CQMy0wxVuul/vJkUjzBo0ICPLVYFX4BxohH/TqIm8uy8zcovpg==",
+      "path": "serilog/2.12.1-dev-01587",
+      "hashPath": "serilog.2.12.1-dev-01587.nupkg.sha512"
+    },
+    "BigSnowManLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
