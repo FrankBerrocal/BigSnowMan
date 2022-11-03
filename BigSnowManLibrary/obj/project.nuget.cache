@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "uxh9EyxobnUg+P6Asy0kmesE1qZl8199XxtE/8mdGr+/G8oZVXgQRofcILd9XOxWnT8D3od2DRteSKozje3egQ==",
+  "success": true,
+  "projectFilePath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj",
+  "expectedPackageFiles": [
+    "/Users/frankberrocal/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
+    "/Users/frankberrocal/.nuget/packages/serilog/2.12.1-dev-01587/serilog.2.12.1-dev-01587.nupkg.sha512"
+  ],
+  "logs": []
+}

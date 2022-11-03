@@ -1,0 +1,138 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/BigSnowManUI.csproj": {}
+  },
+  "projects": {
+    "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj",
+        "projectName": "BigSnowManLibrary",
+        "projectPath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj",
+        "packagesPath": "/Users/frankberrocal/.nuget/packages/",
+        "outputPath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/frankberrocal/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.12.1-dev-01587, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/BigSnowManUI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/BigSnowManUI.csproj",
+        "projectName": "BigSnowManUI",
+        "projectPath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/BigSnowManUI.csproj",
+        "packagesPath": "/Users/frankberrocal/.nuget/packages/",
+        "outputPath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/frankberrocal/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj": {
+                "projectPath": "/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManLibrary/BigSnowManLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.12.1-dev-01587, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

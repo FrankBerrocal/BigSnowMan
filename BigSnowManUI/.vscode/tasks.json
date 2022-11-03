@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/BigSnowManUI/BigSnowManUI.csproj",
+                "${workspaceFolder}/BigSnowManUI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/BigSnowManUI/BigSnowManUI.csproj",
+                "${workspaceFolder}/BigSnowManUI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/BigSnowManUI/BigSnowManUI.csproj"
+                "${workspaceFolder}/BigSnowManUI.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
