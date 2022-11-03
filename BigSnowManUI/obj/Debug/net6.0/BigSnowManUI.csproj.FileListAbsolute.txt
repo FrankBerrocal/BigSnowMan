@@ -18,3 +18,9 @@
 /Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/obj/Debug/net6.0/ref/BigSnowManUI.dll
 /Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/Dapper.dll
 /Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/Serilog.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/System.Data.SqlClient.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/runtimes/win-arm64/native/sni.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/runtimes/win-x64/native/sni.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/runtimes/win-x86/native/sni.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/frankberrocal/Documents/GitHub/BigSnowMan/BigSnowManUI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
