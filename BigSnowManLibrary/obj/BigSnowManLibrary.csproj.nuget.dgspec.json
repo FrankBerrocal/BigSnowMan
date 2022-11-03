@@ -45,6 +45,10 @@
             "Serilog": {
               "target": "Package",
               "version": "[2.12.1-dev-01587, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.4, )"
             }
           },
           "imports": [
