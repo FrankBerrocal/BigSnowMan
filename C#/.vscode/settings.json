@@ -1,0 +1,37 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "AP_Connection",
+            "database": "AP",
+            "username": "sa",
+            "password": "myPassw0rd"
+        },
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "SampleDB_Connection",
+            "database": "SampleDB",
+            "username": "sa",
+            "password": "myPassw0rd",
+            "connectionTimeout": 30
+        }
+    ],
+    "editor.fontSize": 16,
+    "debug.console.fontSize": 14
+}
