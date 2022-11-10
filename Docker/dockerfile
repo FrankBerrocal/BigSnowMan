@@ -1,0 +1,18 @@
+FROM node:latest
+COPY ./html/
+WORKDIR /usr/frankberrocal/documents/GitHun/BigSnowMan
+
+# install app dependencies
+Copy package*.json ./
+RUN npm install
+
+
+#source code
+
+Copy . .
+
+# create a run an app and execute this command
+
+CMD ["npm", "start"]
+
+
