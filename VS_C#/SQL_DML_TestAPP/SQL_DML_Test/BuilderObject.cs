@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-
+/*
 	class BuilderObject
 	{
 
@@ -34,5 +34,5 @@ using System.Data.SqlClient;
 		}
 		
 	}
-
+*/
 

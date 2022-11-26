@@ -1,307 +1,175 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.Reflection.PortableExecutable;
+﻿/*
+                                        Project Management Office Evaluation System (PMOES)
+                                                        Final Project
+
+                                                Student Frank Berrocal 427887
+
+
+
+
+
+SODV-2202 Object Oriented Programming           MGM-1104 Introduction to Project Management             SODV-2201 Relational Databases
+
+Dr. Sohaib Bajwa                                Prof. Achala Vinnakota                                  Prof. Mohamed ElMenshawy
+
+
+
+                                                        December, 2022
+*/
+
+
+
+
+//Código total de integración funcional C# - SQL
+using System;
 using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualBasic;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.Intrinsics.X86;
-
+using System.Data.SqlClient;
 /*
-
-namespace BigSnowManUI
+namespace SqlServerSample
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
-
-
             try
             {
+                Console.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
 
-
-                //Question 1
+                // Build connection string
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";   // update me
-                builder.UserID = "sa";              // update me
-                builder.Password = "myPassw0rd";      // update me
+                builder.DataSource = "localhost, 1440";   
+                builder.UserID = "sa";              
+                builder.Password = "myPassw0rd";      
                 builder.InitialCatalog = "master";
-
-
 
                 // Connect to SQL
                 Console.Write("Connecting to SQL Server ... ");
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
+                    connection.Close();
                     connection.Open();
-                    Console.WriteLine("Done.");
+                    Console.WriteLine("Connection Open.");
 
-                    String sql = "USE AP;";
 
-                    //question 2
-                    using (System.Data.SqlClient.SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        command.ExecuteNonQuery();
-                        Console.WriteLine("selection of AP DB.");
-                    }
-
+                    String sql = "";
                     StringBuilder sb = new StringBuilder();
-
-                    //Connection Test
-                    //Get information from Vendors via Select
-
-                    Console.WriteLine("\n\nSelect all from Vendors table, press any key to continue...");
-
-                    sb.Append("SELECT VendorID, VendorName, VendorCity FROM Vendors;");
+                    sb.Append("DROP DATABASE IF EXISTS [TestDB];");
+                    sb.Append("CREATE DATABASE [TestDB];");
                     sql = sb.ToString();
-
-
-                    Console.ReadKey(true);
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-
-                                Console.WriteLine("{0}\t {1}\t\t\t\t {2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
-
-
-                                while (reader.Read())
-                                {
-                                    Console.WriteLine("{0}\t\t {1}\t\t\t\t {2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
-                                }
-                            }
-                        }
-
-                    }
-                    catch (SqlException e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " database created");
                     }
 
-
-                    //Question 3
-                    //Get information from Invoice via Select using a parameter
+                    //objeto tipo createTable, padre objetoDB
+                    Console.Write("Creating table Projects");
                     sb.Clear();
-                    Console.WriteLine("\n\nSelect all from Invoice table, press any key to continue...");
-                    Console.ReadKey(true);
+                    sb.Append("USE TestDB; ");
+                    sb.Append("IF OBJECT_ID('Projects') IS NOT NULL ");
+                    sb.Append("Drop Table dbo.Projects;");
 
-
-                    int invoiceTotal = 2000;
-
-                    //GO is used in SQL Server tools, not a T-SQL instruction.
-                    sb.Append("USE AP;\n");
-
-                    sb.Append("SELECT InvoiceID, VendorID, InvoiceNumber, InvoiceTotal  FROM Invoices\n");
-                    sb.Append("     WHERE InvoiceTotal > @pricePoint\n");
-                    sb.Append("     ORDER BY invoiceTotal DESC;");
+                    sb.Append("CREATE TABLE Projects( ");
+                    sb.Append("     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL , ");
+                    sb.Append("     Name NVARCHAR(50), ");
+                    sb.Append("     Location NVARCHAR(50) ");
+                    sb.Append("); ");
                     sql = sb.ToString();
-
-                    Console.WriteLine(sql);
-
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-
-                            command.Parameters.AddWithValue("@pricePoint", invoiceTotal);
-
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-
-                                Console.WriteLine("{0}\t {1}\t {2}\t {3}", reader.GetName(0), reader.GetName(1), reader.GetName(2),
-                                        reader.GetName(3));
-                                while (reader.Read())
-                                {
-
-                                    Console.WriteLine("{0}\t\t {1}\t\t {2} \t\t {3}", reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), ((int)reader.GetDecimal(3)));
-                                }
-
-                            }
-
-                        }
-                    }
-                    catch (SqlException e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " table created");
                     }
 
 
-                    //Question 4a:  INSERT
-                    //Update Terms table via INSERT (ExecuteNonQuery).
 
-                    Console.WriteLine("\n\nUpdate Terms table via Insert; press any key to continue...");
-                    Console.ReadKey(true);
-
+                    //objeto tipo insert de una linea, padre objetoDB
+                    Console.WriteLine("Inserting new row");
                     sb.Clear();
-                    //GO is used in SQL Server tools, not a T-SQL instruction.
-                    sb.Append("USE AP;\n");
-
-                    sb.Append("INSERT INTO Terms ( TermsDescription, TermsDueDays) VALUES\n");
-                    sb.Append("     ('Net due 120 days', 120),\n");
-                    sb.Append("     ('Net due 150 days', 150),\n");
-                    sb.Append("     ('Net due 180 days', 180),\n");
-                    sb.Append("     ('Net due 210 days', 210);\n");
-
+                    sb.Append("INSERT Projects(Name, Location) ");
+                    sb.Append("VALUES (@name, @location);");
                     sql = sb.ToString();
-
-                    Console.WriteLine(sql);
-
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
+                        command.Parameters.AddWithValue("@name", "Redrum2");
+                        command.Parameters.AddWithValue("@location", "Turquia");
 
 
-                            command.ExecuteNonQuery();
-                            Console.WriteLine("Records inserted");
-
-                        }
-                    }
-                    catch (SqlException e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        //validation, not required.  Execute the query and save result in variable
+                        int rowsAffected = command.ExecuteNonQuery();  
+                        Console.WriteLine(rowsAffected + " row(s) inserted");
                     }
 
-                    //Question 4b:  UPDATE
-                    //Update Terms table via UPDATE (ExecuteNonQuery).
 
-                    Console.WriteLine("\n\nUpdate Terms table via Update; press any key to continue...");
-                    Console.ReadKey(true);
-
+                    //objeto tipo insert de varias lineas, padre objetoDB
                     sb.Clear();
-                    //GO is used in SQL Server tools, not a T-SQL instruction.
-                    sb.Append("USE AP;\n");
-
-                    int newValue = 121;
-                    int oldValue = 120;
-
-                    sb.Append("UPDATE TERMS SET TermsDueDays = @newValue\n");
-                    sb.Append("     WHERE TermsDueDays = @oldValue;\n");
-
-
+                    Console.WriteLine("Inserting several rows");
+                    sb.Append("INSERT INTO Projects (Name, Location) VALUES ");
+                    sb.Append("(N'Optimus', N'Australia'), ");
+                    sb.Append("(N'Nikita', N'India'), ");
+                    sb.Append("(N'LaserBeak', N'Germany'), ");
+                    sb.Append("(N'Lucy', N'United States'); ");
                     sql = sb.ToString();
-
-                    Console.WriteLine(sql);
-
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-
-                            command.Parameters.AddWithValue("@newValue", newValue);
-                            command.Parameters.AddWithValue("@oldValue", oldValue);
-
-                            command.ExecuteNonQuery();
-                            Console.WriteLine("Record updated");
-
-                        }
-                    }
-                    catch (SqlException e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " row(s) inserted");
                     }
 
-
-                    //Question 4C:  DELETE
-                    //Update Terms table via DELETE (ExecuteNonQuery).
-
-                    Console.WriteLine("\n\nUpdate Terms table via DELETE; press any key to continue...");
-                    Console.ReadKey(true);
-
+                    //objeto tipo update, padre objetoDB
                     sb.Clear();
-                    //GO is used in SQL Server tools, not a T-SQL instruction.
-                    sb.Append("USE AP;\n");
-
-
-                    int delValue = 121;
-
-                    sb.Append("DELETE FROM Terms\n");
-                    sb.Append("     WHERE TermsDueDays = @delValue\n");
-                    sb.Append("     OR TermsDueDays = 150\n");
-                    sb.Append("     OR TermsDueDays = 180\n");
-                    sb.Append("     OR TermsDueDays = 210;\n");
-
-
+                    Console.WriteLine("Upate record");
+                    String projectToUpdate = "Nikita";
+                    sb.Append("UPDATE Projects SET Location = N'Costa Rica' WHERE Name = @name");
                     sql = sb.ToString();
-
-                    Console.WriteLine(sql);
-
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-
-                            command.Parameters.AddWithValue("@delValue", delValue);
-
-
-                            command.ExecuteNonQuery();
-                            Console.WriteLine("Records deleted");
-
-                        }
-                    }
-                    catch (SqlException e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        command.Parameters.AddWithValue("@name", projectToUpdate);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " row(s) updated");
                     }
 
 
-
-                    //Question 5: ExecuteScalar
-                    //Update Terms table via DELETE (ExecuteNonQuery).
-
-                    Console.WriteLine("\n\nReturn singular escalar value; press any key to continue...");
-                    Console.ReadKey(true);
-
+                    //objeto tipo update, padre objetoDB
                     sb.Clear();
-                    //GO is used in SQL Server tools, not a T-SQL instruction.
-                    sb.Append("USE AP;\n");
-
-
-
-
-                    sb.Append("SELECT SUM(InvoiceTotal)\n");
-                    sb.Append("     FROM Invoices;\n");
-
-
-
+                    Console.WriteLine("Delete record");
+                    String projectToDelete = "Lucy";
+                    sb.Append("DELETE FROM Projects WHERE Name = @name;");
                     sql = sb.ToString();
-
-                    Console.WriteLine(sql);
-
-                    try
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-
-
-
-                            object invoiceTotalSum = command.ExecuteScalar();
-                            Int32 invoiceTotalCapital = System.Convert.ToInt32(invoiceTotalSum);
-                            command.ExecuteNonQuery();
-                            Console.WriteLine("Total revenue in invoices: $" + invoiceTotalCapital);
-
-                        }
+                        command.Parameters.AddWithValue("@name", projectToDelete);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " row(s) deleted");
                     }
-                    catch (SqlException e)
+
+
+
+                    //object tipo select, padre displayDB
+                    sb.Clear();
+                    Console.WriteLine("Select all Records");
+                    sql = "SELECT Id, Name, Location FROM Projects;";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Console.WriteLine(e.ToString());
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            Console.WriteLine("{0}\t\t\t {1}\t\t {2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
+                                    while (reader.Read())
+                                    {
+
+                                        Console.WriteLine("{0}\t\t {1}\t\t {2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                                    }
+                        }
                     }
 
                 }
-
-
             }
-
             catch (SqlException e)
             {
                 Console.WriteLine(e.ToString());
             }
+
+            Console.WriteLine("All done.");
 
         }
     }
