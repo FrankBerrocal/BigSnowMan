@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
-
+/*
 
 namespace SQL_DML_Test 
 {
@@ -23,5 +23,5 @@ namespace SQL_DML_Test
             }
         }
     }
-}
+}*/
 
