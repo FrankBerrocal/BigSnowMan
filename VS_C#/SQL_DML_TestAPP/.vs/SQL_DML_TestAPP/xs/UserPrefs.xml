@@ -1,26 +1,28 @@
 ﻿<Properties StartupConfiguration="{1EAF990B-DF22-413C-90A4-69F1F19B1AE3}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SQL_DML_Test/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SQL_DML_Test/BuilderObject.cs">
     <Files>
-      <File FileName="SQL_DML_Test/Program.cs" Line="25" Column="45" />
+      <File FileName="SQL_DML_Test/BuilderObject.cs" Line="28" Column="2" />
+      <File FileName="SQL_DML_Test/ObjectTest.cs" Line="8" Column="6" />
+      <File FileName="SQL_DML_Test/Conn2" Line="6" Column="2" />
+      <File FileName="SQL_DML_Test/ConnectionObjects.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SQL_DML_TestAPP" expanded="True">
-            <Node name="SQL_DML_Test" expanded="True" />
+            <Node name="SQL_DML_Test" expanded="True">
+              <Node name="BuilderObject.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.SQL__DML__Test PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.SQL__DML__Test PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

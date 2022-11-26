@@ -1,16 +1,17 @@
 ﻿using System;
-
+using System.Data.SqlClient;
+/*
 
 namespace SQL_DML_Test 
 {
-	public class ObjectTest
-	{
+    public class ObjectTest
+    {
         string dataSource = "localhost, 1440";
         string userId = "sa";
         string password = "myPassw0rd";
         string initialCatalog = "master";
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
@@ -20,5 +21,7 @@ namespace SQL_DML_Test
             {
                 Console.WriteLine(e.ToString());
             }
-}
+        }
+    }
+}*/
 
