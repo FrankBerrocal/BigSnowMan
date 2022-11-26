@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 		SqlConnectionStringBuilder Builder = new SqlConnectionStringBuilder();
 		
 
-		public BuilderObject(string dataSource, string userId, string password, string initialCatalog)
+		public BuilderObject(string dataSource, string userId, string password, string initialCatalog)  //constructor
 		{
 			DataSource = dataSource;
 			UserID = userId;
@@ -25,6 +25,7 @@ using System.Data.SqlClient;
 
 		public SqlConnectionStringBuilder createBuilder(SqlConnectionStringBuilder builder)
 		{
+	
 			Builder.DataSource = DataSource;
 			Builder.UserID = UserID;
 			Builder.Password = Password;
