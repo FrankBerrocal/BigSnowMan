@@ -18,51 +18,66 @@ using System;
 using System.Collections.Generic;
 using BigSnowMan;
 
-public class StatusObject
+namespace Status
 {
-   
-    public StatusObject()
-    {
-        CreateStatus();
-    }
-
-    public Dictionary<OptionObject<string>, int> CreateStatus( )  //OptionObject forced to string parameter
-    {
-        Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
-
-        
-
-        OptionObject<string> Active= new OptionObject<string>("Active");
-        OptionObject<string> Archived = new OptionObject<string>("Archived");
-        OptionObject<string> Cancelled = new OptionObject<string>("Cancelled");
-        OptionObject<string> Completed= new OptionObject<string>("Completed");
-        OptionObject<string> Draft = new OptionObject<string>("Draft");
-        OptionObject<string> OnHold = new OptionObject<string>("On Hold");
-        OptionObject<string> UnderReview = new OptionObject<string>("Under Review ");
-
-        Status.Add(Active, 1);
-        Status.Add(Archived, 2);
-        Status.Add(Cancelled, 3);
-        Status.Add(Completed, 4);
-        Status.Add(Draft, 5);
-        Status.Add(OnHold, 6);
-        Status.Add(UnderReview, 7);
-        
-        return Status;
-    }
-
-
-
-    public void  DisplayStatus(Dictionary<OptionObject<string>, int> _status)
+    public class StatusObject
     {
 
-        foreach (OptionObject<string> element in _status.Keys)
-            Console.WriteLine(element.Description);
+        public StatusObject()
+        {
+            CreateStatus();
+        }
+
+        public Dictionary<OptionObject<string>, int> CreateStatus()  //OptionObject forced to string parameter
+        {
+            Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
+
+            OptionObject<string> Active = new OptionObject<string>("Active");
+            OptionObject<string> Archived = new OptionObject<string>("Archived");
+            OptionObject<string> Cancelled = new OptionObject<string>("Cancelled");
+            OptionObject<string> Completed = new OptionObject<string>("Completed");
+            OptionObject<string> Draft = new OptionObject<string>("Draft");
+            OptionObject<string> OnHold = new OptionObject<string>("On Hold");
+            OptionObject<string> UnderReview = new OptionObject<string>("Under Review ");
+
+            Status.Add(Active, 1);
+            Status.Add(Archived, 2);
+            Status.Add(Cancelled, 3);
+            Status.Add(Completed, 4);
+            Status.Add(Draft, 5);
+            Status.Add(OnHold, 6);
+            Status.Add(UnderReview, 7);
+
+            string test = Status.Keys.ElementAt(1).Description;
+
+            return Status;
+        }
+
+        public string GetStatusKey(Dictionary<OptionObject<string>, int> _status, int _position)
+        {
+            string statusKey = _status.Keys.ElementAt(_position).Description;
+            return statusKey;
+        }
+
+        public int GetStatusValue(Dictionary<OptionObject<string>, int> _status, int _position)
+        {
+            int statusValue = _status.Values.ElementAt(_position);
+            return statusValue;
+        }
+
+
+
+        public void DisplayStatus(Dictionary<OptionObject<string>, int> _status)
+        {
+
+            foreach (OptionObject<string> element in _status.Keys)
+                Console.WriteLine(element.Description);
+
+        }
+
+
 
     }
-
-   
-
 }
 
 /*

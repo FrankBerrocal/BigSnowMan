@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using BigSnowMan;
+using Status;
+using System.Linq;
 
 
 public class ProjectObject
@@ -25,13 +27,10 @@ public class ProjectObject
 
     //List<string, string, DateOnly, DateOnly, int, int, int, int, Dictionary<OptionObject<string>, int>, Dictionary<OptionObject<string>, int>> Project =
 
-    
-    
-
 
     List<object> Project = new List<object>();
 
-    public ProjectObject(Dictionary<OptionObject<string>, int> _status, Dictionary<OptionObject<string>, int> _type)
+    public ProjectObject(Dictionary<OptionObject<string>,int> _status, Dictionary<OptionObject<string>, int> _type)
 	{
        // CaptureProjectValues();
         CreateProject( _status, _type);
@@ -41,44 +40,35 @@ public class ProjectObject
 	public List<object> CreateProject(Dictionary<OptionObject<string>, int> _status, Dictionary<OptionObject<string>, int> _type)
 	{
         List<object> Project = new List<object>();
-        
+       
+
 
         CaptureProjectValues(Project, _status, _type);
-        Console.WriteLine("\nProjects");
-        //Console.WriteLine(string.Join(", ", Project));  //Concatenates in one single line and displays all information.
-        Project.ForEach(i => Console.WriteLine(i.ToString()));  //presents information by element.
-        for (int i = 0; i < Project.Count(); i++)
-        {
-            if (Project[i].GetType == OptionObject<string>)
-            {
 
-            }
-        }
 
 
         return Project;
 
     }
 
-    private List<object> CaptureProjectValues(List<object> _project, Dictionary<OptionObject<string>, int> _status, Dictionary<OptionObject<string>, int> _type)
+    private List<dynamic> CaptureProjectValues(List<object> _project, Dictionary<OptionObject<string>, int> _status, Dictionary<OptionObject<string>, int> _type)
     {
         //Capture values here, from Web Interface.  Create an object to capture web information.
-        Dictionary<OptionObject<string>, int> ProjectStatus = new Dictionary<OptionObject<string>, int>();
-        Dictionary<OptionObject<string>, int> ProjectType = new Dictionary<OptionObject<string>, int>();
 
-        //All variables to be captured from UI
 
         string ProjectName = "Lighthouse";
         string ProjectDescription = "Accountig project for Nest Consultants";
         var ProjectStartDate = new DateOnly(2022,12,08);
         var ProjectExpEndDate = new DateOnly(2023, 12, 08);
         var ProjectRealEndDate = ProjectExpEndDate;
-        var ProjectCostReport = "";
+        var ProjectCostReport = "No tool assigned";
         var StatusID = 0;  //active status as default
-        ProjectStatus.Add(_status.Keys.ElementAt(StatusID), _status.Values.ElementAt(StatusID));
-        var TypeID = 0; //technology type as default.
-        ProjectType.Add(_type.Keys.ElementAt(TypeID), _type.Values.ElementAt(TypeID));
+        string ProjectStatus =_status.Keys.ElementAt(StatusID).Description;
+        var TypeID = 0;  //active status as default
+        string ProjectType = _type.Keys.ElementAt(TypeID).Description;
 
+
+        
 
         // setting the project dictionary.
         try
@@ -92,8 +82,41 @@ public class ProjectObject
             _project.Add(ProjectStatus); //index 6
             _project.Add(ProjectType); //index 7
 
-            _project.Insert(5, ProjectStatus);
 
+
+
+
+            Console.WriteLine("\nProjects");
+            //Console.WriteLine(string.Join(", ", Project));  //Concatenates in one single line and displays all information.
+            //Project.ForEach(i => Console.WriteLine(i.ToString()));  //presents information by element.
+
+
+            Type tipo = Type.GetType("System.Collections.Generic.Dictionary`2[BigSnowMan.OptionObject`1[System.String], System.Int32]");
+
+            for (int i = 0; i < _project.Count(); i++)
+            {
+                if (_project[i].GetType() == tipo)
+                {
+
+
+                    //Console.WriteLine(_project.ElementAt(i).ToString());
+                }
+                else
+                {
+                    Console.WriteLine(_project[i]);
+                }
+            }
+
+
+
+
+
+
+
+
+            // AddTools(_project, 5, ProjectStatus);
+
+          //  DisplayProjectInfo(_project);
 
         }
         catch(Exception e)
@@ -104,14 +127,50 @@ public class ProjectObject
         return _project;
     }
 
-    public void AddTools()
+    public void AddTools(List<object> _project, int _position, Dictionary<OptionObject<string>, int> _tool)
     {
-        //add new tool elements after the project has been created.
+        _project.Insert(_position, _tool);
     }
 
     public void DisplayTool()
     {
         //calls every tool DisplayCalculationsMethod and presents the information under the Project.
+
+    }
+
+    public void DisplayProjectInfo(List<object> _project)
+    {
+        Console.WriteLine("\nProjects");
+        //Console.WriteLine(string.Join(", ", Project));  //Concatenates in one single line and displays all information.
+        //Project.ForEach(i => Console.WriteLine(i.ToString()));  //presents information by element.
+        StatusObject test = new StatusObject();
+
+        Type tipo = Type.GetType("System.Collections.Generic.Dictionary`2[BigSnowMan.OptionObject`1[System.String], System.Int32]");
+
+        for (int i = 0; i < _project.Count(); i++)
+        {
+            if (_project[i].GetType() == tipo)
+            {
+
+               
+                Console.WriteLine(_project.ElementAt(i).ToString());
+            }
+            else
+            {
+                Console.WriteLine(_project[i]);
+            }
+        }
+    }
+
+    public string GetObjectKey(List<dynamic>_list, int _position)
+    {
+        string objectKey = "";
+        _list[_position].
+
+
+        Console.WriteLine(_list.FindIndex(_list[_position]));
+        //objectKey = _list.Keys.ElementAt(_position).Description;
+        return objectKey;
     }
 
 
@@ -138,4 +197,5 @@ public class ProjectObject
  * List: https://blog.submain.com/c-list-definition-examples-best-practices-pitfalls/
  * List: https://www.softwaretestinghelp.com/c-sharp/csharp-list-and-dictionary/
  * Find all: https://www.geeksforgeeks.org/c-sharp-how-to-get-all-elements-of-a-list-that-match-the-conditions-specified-by-the-predicate/
+ * Type comparison:  https://stackoverflow.com/questions/3287590/how-to-gettype-of-liststring-in-c
  */

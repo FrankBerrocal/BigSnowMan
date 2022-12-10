@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
+using BigSnowMan;
+using Status;
 
-namespace BigSnowMan
-{
 	public class Execution
 	{
 		static void Main(string[] args)
@@ -21,6 +20,7 @@ namespace BigSnowMan
 			Status = StatusCreation.CreateStatus();
 
 			StatusCreation.DisplayStatus(Status); //display elements
+
 
 
 
@@ -54,9 +54,11 @@ namespace BigSnowMan
 
 			ProjectObject project = new ProjectObject(Status, Type);
 
+            //project.DisplayProjectInfo(project);
+
         }
 	}
-}
+
 
 
 /*
