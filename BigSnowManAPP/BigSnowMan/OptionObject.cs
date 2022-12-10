@@ -1,46 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*****************************************************************
+ * Project Management Office Evaluation System (Prototype)       
+ * PMOES                                                                               
+ *                                                                                           
+ * Final Project                                                                                                                                       
+ *                                                                                            
+ * Frank Berrocal - 427887                                                      
+ * SODV2202 - Object Oriented Programming                            
+ * Prof.  Dr. Sohaib Bajwa                                                         
+ *                                
+ * 
+ * Bow Valley College
+ * December 2022
+ ******************************************************************/
 
 
+using System;
 
-public class OptionObject<OptionDesc>
+namespace BigSnowMan
 {
-    public OptionDesc Option;
-    
+	public class OptionObject<T>
+	{
+		
+        private T Option; // field
 
-    public OptionObject(OptionDesc _option)
-    {
-        Option = _option;
-    }
+        public OptionObject(T _option)
+        {
+            Option = _option;
+        }
 
-    public override string ToString() => String.Format(Option.ToString());  
-}
-
-
-
-//Generic objects to replace multiple entities used to create selection elements, like status and project type.  
-
-
-//Regular encapsulation code.
-
-/*
-public class StatusObject
-{
-    public string Status;
-
-
-    public StatusObject(String _status)
-    {
-        Status = _status;
-    }
-    public string getStatus()
-    {
-        return Status;
-    }
-    public override string ToString()
-    {
-        return Status;
+        public T Description
+        // property
+        {
+            get { return Option; }
+            set { Option = value; }
+        }
     }
 }
-*/
 
