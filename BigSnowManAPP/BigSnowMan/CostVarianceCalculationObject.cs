@@ -15,49 +15,41 @@
 
 
 using System;
-using Calculation;
 
-namespace Record
-{
-	public class RecordObject 
-	{
-		private int ToolObjectID;
+
+
+
+    public class CostVarianceCalculationObject : CalculationObject
+    {
         private int ID;
-		private DateOnly Date;
-
-
-		public RecordObject(int _toollobjectId, DateOnly _date)
-		{
-            ID = _toollobjectId;
-            Date = _date;
-        }
-
-        public int ToolID  
+        private int RecordID;
+        private float Variable1;
+        private float Variable2;
+        private float Variable3;
+        private float Variable4;
+        private float Result;
+        
+        public CostVarianceCalculationObject(int _recID)
         {
-            get => ToolObjectID;
-            set => ToolObjectID = value;
-        }
-        public int RecordID  //retrieve after insertion of data in SQL
-        {
-            get => ID;
-            set => ID = value;
-        }
+            RecordID = _recID;
+         }
 
-        public DateOnly RecordDate
-        {
-            get => Date;
-            set => Date = value;
-        }
+        
 
-        public string displayRecordInfo()
-        {
-            string _recordInfo;
-            _recordInfo = "Record ID: " + ID +
-                                    ".\nCreated on: " + Date +".";
-            return _recordInfo;
-        }
+        
 
-        //create calculations
+        public override float calculation2(int _var1, int _var2)
+        {
+            float _calculationResult = 0;
+            // insertar las operaciones aqui, necesito usar delegados por fuerza y lamdas
+            return _calculationResult;
+        }
     }
-}
 
+
+/*
+ * 
+ * References
+ * inheritance and Constructors:  https://www.geeksforgeeks.org/c-sharp-inheritance-in-constructors/
+ * 
+ */

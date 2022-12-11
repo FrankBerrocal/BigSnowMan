@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System;
 using BigSnowMan;
+using Record;
+
 
 namespace Tool
 {
@@ -28,15 +30,17 @@ namespace Tool
         private DateOnly Date;
         private int TypeID;
         private Dictionary<OptionObject<string>, int> ToolType;  //name of entity in SQL
+        private int ToolKAID;
         private Dictionary<OptionObject<string>, int> ToolKA;   //Knowledge Area
 
 
-        public ToolObject(int _projectId, DateOnly _date, int _typeId, Dictionary<OptionObject<string>, int> _toolType, Dictionary<OptionObject<string>, int> _toolKA)
+        public ToolObject(int _projectId, DateOnly _date, Dictionary<OptionObject<string>, int> _toolType, int _typeId, Dictionary<OptionObject<string>, int> _toolKA, int _toolKDid)
 		{
             ProjectID = _projectId;
             Date = _date;
             TypeID = _typeId;
             ToolType = _toolType;
+            ToolKAID = _toolKDid;
             ToolKA = _toolKA;
 		}
 
@@ -84,8 +88,15 @@ namespace Tool
 
         public string displayToolInfo()
 		{
-			return null;
+            string _toolInfo;
+            _toolInfo = "Name of tool: " + ToolType.Keys.ElementAt(TypeID).Description +
+                                    "\nfor project " + ProjectID +
+                                    ".\nCreated on: " + Date +
+                                    ".\nKnowledge area: " + ToolKA.Keys.ElementAt(ToolKAID).Description;
+            return _toolInfo;
 		}
+
+        //create records
 	}
 }
 
