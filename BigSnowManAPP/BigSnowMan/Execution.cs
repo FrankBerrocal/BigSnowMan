@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using BigSnowMan;
 using Status;
+using Project;
 
-	public class Execution
+
+    public class Execution : StatusObject
 	{
 		static void Main(string[] args)
 		{
@@ -52,9 +54,29 @@ using Status;
 
 			
 
-			ProjectObject project = new ProjectObject(Status, Type);
+			//ProjectObject project = new ProjectObject(Status, Type);
 
-            //project.DisplayProjectInfo(project);
+
+
+
+
+        string ProjectName = "Lighthouse";
+        string ProjectDescription = "Accountig project for Nest Consultants";
+        var ProjectStartDate = new DateOnly(2022, 12, 08);
+        var ProjectExpEndDate = new DateOnly(2023, 12, 08);
+        var ProjectRealEndDate = ProjectExpEndDate;
+
+        var StatusID = 5;  //active status as default
+        var ProjectStatus = Status;
+        var TypeID = 4;  //active status as default
+        var ProjectType = Type;
+
+        ProjectObject Proyecto = new ProjectObject(ProjectName, ProjectDescription, ProjectStartDate, ProjectExpEndDate, ProjectRealEndDate, ProjectStatus, StatusID, ProjectType, TypeID);
+
+        Console.WriteLine(Proyecto.ProjectStatusDisplay(StatusID) );
+        Console.WriteLine(Proyecto.ProjectType.Keys.ElementAt(1).Description);
+
+        
 
         }
 	}

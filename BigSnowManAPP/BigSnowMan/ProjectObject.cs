@@ -22,7 +22,7 @@ using Status;
 using System.Linq;
 
 
-public class ProjectObject
+public class ProjectObject2
 {
 
     //List<string, string, DateOnly, DateOnly, int, int, int, int, Dictionary<OptionObject<string>, int>, Dictionary<OptionObject<string>, int>> Project =
@@ -30,7 +30,7 @@ public class ProjectObject
 
     List<object> Project = new List<object>();
 
-    public ProjectObject(Dictionary<OptionObject<string>,int> _status, Dictionary<OptionObject<string>, int> _type)
+    public ProjectObject2(Dictionary<OptionObject<string>,int> _status, Dictionary<OptionObject<string>, int> _type)
 	{
        // CaptureProjectValues();
         CreateProject( _status, _type);
@@ -54,6 +54,9 @@ public class ProjectObject
     private List<dynamic> CaptureProjectValues(List<object> _project, Dictionary<OptionObject<string>, int> _status, Dictionary<OptionObject<string>, int> _type)
     {
         //Capture values here, from Web Interface.  Create an object to capture web information.
+
+        Dictionary<OptionObject<string>, int> test = new Dictionary<OptionObject<string>, int>();
+
 
 
         string ProjectName = "Lighthouse";
@@ -89,7 +92,7 @@ public class ProjectObject
             Console.WriteLine("\nProjects");
             //Console.WriteLine(string.Join(", ", Project));  //Concatenates in one single line and displays all information.
             //Project.ForEach(i => Console.WriteLine(i.ToString()));  //presents information by element.
-
+            /*
 
             Type tipo = Type.GetType("System.Collections.Generic.Dictionary`2[BigSnowMan.OptionObject`1[System.String], System.Int32]");
 
@@ -106,7 +109,7 @@ public class ProjectObject
                     Console.WriteLine(_project[i]);
                 }
             }
-
+            */
 
 
 
@@ -137,7 +140,7 @@ public class ProjectObject
         //calls every tool DisplayCalculationsMethod and presents the information under the Project.
 
     }
-
+    /*
     public void DisplayProjectInfo(List<object> _project)
     {
         Console.WriteLine("\nProjects");
@@ -160,7 +163,7 @@ public class ProjectObject
                 Console.WriteLine(_project[i]);
             }
         }
-    }
+    }*/
 
     public string GetObjectKey(List<dynamic>_list, int _position)
     {
@@ -198,4 +201,5 @@ public class ProjectObject
  * List: https://www.softwaretestinghelp.com/c-sharp/csharp-list-and-dictionary/
  * Find all: https://www.geeksforgeeks.org/c-sharp-how-to-get-all-elements-of-a-list-that-match-the-conditions-specified-by-the-predicate/
  * Type comparison:  https://stackoverflow.com/questions/3287590/how-to-gettype-of-liststring-in-c
+ * Linq to get properties inside List https://stackoverflow.com/questions/13781468/get-list-of-properties-from-list-of-objects
  */
