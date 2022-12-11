@@ -20,6 +20,8 @@ using BigSnowMan;
 using Status;
 using Project;
 using Tool;
+using Record;
+using Calculation;
 
 
 public class Execution : StatusObject
@@ -80,7 +82,7 @@ public class Execution : StatusObject
         int ProjectID = 1;
         int ToolTypeID = 0;
         int ToolKAID = 3;
-        DateOnly ToolDate = new DateOnly(2022, 12, 11); 
+        DateOnly ToolDate = new DateOnly(2022, 12, 11);
 
 
         //Tool and KArea sent as parameters
@@ -91,8 +93,16 @@ public class Execution : StatusObject
 
 
 
+        Console.WriteLine("\nRecord Definition\n");
+        int ToolID = 1;
+        DateOnly RecordDate = new DateOnly(2022, 12, 11);
 
-        
+        RecordObject CostReportLineLH = new RecordObject(ToolID, RecordDate);
+        Console.WriteLine(CostReportLineLH.displayRecordInfo() );
+
+        CalculationObject test = new 
+
+            
 
     }
 }

@@ -18,7 +18,8 @@ using System;
 using System.Collections.Generic;
 using System;
 using BigSnowMan;
-using System.Xml.Linq;
+using Record;
+
 
 namespace Tool
 {
@@ -94,6 +95,8 @@ namespace Tool
                                     ".\nKnowledge area: " + ToolKA.Keys.ElementAt(ToolKAID).Description;
             return _toolInfo;
 		}
+
+        //create records
 	}
 }
 
