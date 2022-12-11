@@ -1,20 +1,4 @@
-﻿/*****************************************************************
- *Project Management Office Evaluation System (Prototype)       
- * PMOES                                                                               
- *                                                                                           
- * Final Project                                                                                                                                       
- *                                                                                            
- * Frank Berrocal - 427887                                                      
- * SODV2202 - Object Oriented Programming                            
- * Prof.  Dr. Sohaib Bajwa                                                         
- *                                
- * 
- * Bow Valley College
- * December 2022
- ******************************************************************/
-
-
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -1338,8 +1322,5 @@ public class Database
     }
 
 
-/*  This class contains all the elements to create a complete 4N database in SQL Server.   
- *   The design was originally implements in TSQL to ensure integrity, restrictions, relations, and data entries.
- * 
- */
+
 
