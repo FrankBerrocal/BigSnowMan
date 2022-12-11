@@ -40,15 +40,15 @@ public class KAreaObject
         OptionObject<string> Procurement = new OptionObject<string>("Project Procurement Management");
         OptionObject<string> Stakeholder = new OptionObject<string>("Project Stakeholder Management");
 
-        KArea.Add(Integration, 1);
-        KArea.Add(Scope, 2);
-        KArea.Add(Time, 3);
-        KArea.Add(Cost, 4);
-        KArea.Add(Quality, 5);
-        KArea.Add(Resource, 6);
-        KArea.Add(Communications, 7);
-        KArea.Add(Procurement, 8);
-        KArea.Add(Stakeholder, 8);
+        KArea.Add(Integration, 1);  //index 0
+        KArea.Add(Scope, 2);  //index 1
+        KArea.Add(Time, 3); //index 2
+        KArea.Add(Cost, 4);  //index 3
+        KArea.Add(Quality, 5); //index 4
+        KArea.Add(Resource, 6);  //index 5
+        KArea.Add(Communications, 7);  //index 6
+        KArea.Add(Procurement, 8);  //index 7
+        KArea.Add(Stakeholder, 9); //index 8
 
 
         return KArea;
