@@ -12,18 +12,20 @@
  * Bow Valley College
  * December 2022
  ******************************************************************/
+using System;
+using System.Collections.Generic;
+
 
 
 using System;
-
 namespace BigSnowMan
 {
-	public interface ProjectInterface
+	public class ToolObject
 	{
-        string ProjectStatusDisplay();
-
-        string ProjectTypeDisplay();
-
-    }
+		
+		public ToolObject()
+		{
+		}
+	}
 }
 

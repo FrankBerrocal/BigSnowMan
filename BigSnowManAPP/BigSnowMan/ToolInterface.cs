@@ -15,15 +15,11 @@
 
 
 using System;
-
 namespace BigSnowMan
 {
-	public interface ProjectInterface
+	public interface ToolInterface
 	{
-        string ProjectStatusDisplay();
-
-        string ProjectTypeDisplay();
-
-    }
+		string displayToolInfo();
+	}
 }
 

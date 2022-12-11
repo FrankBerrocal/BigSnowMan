@@ -96,15 +96,15 @@ namespace Project
             set => Type = value;
         }
 
-        public string ProjectStatusDisplay(int _statusID)
+        public string ProjectStatusDisplay()
         {
-            string statusName = Status.Keys.ElementAt(_statusID).Description;
+            string statusName = Status.Keys.ElementAt(StatusID).Description;
             return statusName;
         }
 
-        public string ProjectTypeDisplay(int _typeID)
+        public string ProjectTypeDisplay()
         {
-            string statusName = Type.Keys.ElementAt(_typeID).Description;
+            string statusName = Type.Keys.ElementAt(TypeID).Description;
             return statusName;
         }
 
