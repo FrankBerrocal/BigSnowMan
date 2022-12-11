@@ -72,6 +72,18 @@ namespace Project
             set => Description = value;
         }
 
+        public int ProjectStatusID
+        {
+            get => StatusID;
+            set => StatusID = value;
+        }
+
+        public int ProjectTypeID
+        {
+            get => TypeID;
+            set => TypeID = value;
+        }
+
         public Dictionary<OptionObject<string>, int> ProjectStatus
         {
             get => Status;
