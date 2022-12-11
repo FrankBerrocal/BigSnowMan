@@ -15,11 +15,10 @@
 
 
 using System;
-namespace BigSnowMan
-{
+
+
 	public interface ToolInterface
 	{
 		string displayToolInfo();
 	}
-}
 

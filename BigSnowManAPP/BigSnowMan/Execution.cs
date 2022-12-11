@@ -73,7 +73,9 @@ using Project;
             Console.WriteLine(Proyecto.ProjectStatusDisplay() );
             Console.WriteLine(Proyecto.ProjectType.Keys.ElementAt(1).Description ); 
             Proyecto.ProjectStatusID = 0;  //status change
-            Console.WriteLine(Proyecto.ProjectStatusDisplay()); 
+            Console.WriteLine(Proyecto.ProjectStatusDisplay());
+
+            Console.WriteLine(Proyecto.ProjectInfoDisplay()); 
 
         
 

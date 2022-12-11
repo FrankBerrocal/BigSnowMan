@@ -30,7 +30,7 @@ public class ToolType
     {
         Dictionary<OptionObject<string>, int> Tool = new Dictionary<OptionObject<string>, int>();
 
-        OptionObject<string> CostReport = new OptionObject<string>("Cost Report");
+        OptionObject<string> CostReport = new OptionObject<string>("Cost Report");  //names of entities not required.  I choose Dictionary to use the Database ID.
         OptionObject<string> WBS = new OptionObject<string>("Workbreakdown Structure");
         OptionObject<string> Traceability = new OptionObject<string>("Traceability Matrix");
         OptionObject<string> StakeholderList = new OptionObject<string>("Stakeholder List");

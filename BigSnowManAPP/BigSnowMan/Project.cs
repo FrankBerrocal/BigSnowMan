@@ -20,11 +20,13 @@ using System.Net.NetworkInformation;
 using System.Runtime.Serialization;
 using BigSnowMan;
 using Status;
+using Tool;
 
 namespace Project
 {
     public class ProjectObject : ProjectInterface
-    { 
+    {
+        private int ID;  
         private string Name; 
         private string Description;
         private DateOnly StartDate;
@@ -54,6 +56,12 @@ namespace Project
 
         }
 
+        public int ProjectID  //retrieve after insertion of data in SQL
+        {
+            get => ID;
+            set => ID = value;
+        }
+
         public string ProjectName
         {
             get =>Name;
@@ -66,10 +74,22 @@ namespace Project
             set => Description = value;
         }
 
-        public string ProjectStartDate
+        public DateOnly ProjectStartDate
         {
-            get => Description;
-            set => Description = value;
+            get => StartDate;
+            set => StartDate = value;
+        }
+
+        public DateOnly ProjectExpectedEndDate
+        {
+            get => ExpEndDate;
+            set => ExpEndDate = value;
+        }
+
+        public DateOnly ProjectRealEndDate
+        {
+            get => RealEndDate;
+            set => RealEndDate = value;
         }
 
         public int ProjectStatusID
@@ -106,6 +126,20 @@ namespace Project
         {
             string statusName = Type.Keys.ElementAt(TypeID).Description;
             return statusName;
+        }
+
+        public string ProjectInfoDisplay()
+        {
+            string _projectInfo;
+            _projectInfo=   "Name of Project: " + Name +
+                                    ",\n"+Description+
+                                    ".\nCreated on: " + StartDate +
+                                    ",\nwith expected end date: " + ExpEndDate +
+                                    ".\nProject "+Name+ "  is type " + ProjectTypeDisplay() +
+                                    ",\nand the current stats is " + ProjectStatusDisplay();
+
+
+            return _projectInfo;
         }
 
     }
