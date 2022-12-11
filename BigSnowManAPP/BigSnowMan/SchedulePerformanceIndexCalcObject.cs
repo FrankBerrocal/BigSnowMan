@@ -15,27 +15,27 @@
 
 
 using System;
-using System.Xml.Linq;
+
 
 namespace CalculationTool
 {
-    public class CostVarianceCalculationObject
+    public class SchedulePerformanceIndexCalculationObject
     {
         private int RecordID;
-        private int CostVariance_ID;
+        private int SchedulePerfIndex_ID;
         private double EV;  //earned value
-        private double AC;  //actual cost
-        private double CVValue;  // Cost Variance result
-  
-        public CostVarianceCalculationObject(int _recID)
+        private double PV;  //planned value
+        private double SPIValue;  //schedule variance metric.
+
+        public SchedulePerformanceIndexCalculationObject(int _recID)
         {
             RecordID = _recID;
         }
 
-        public int CostVarianceID  //retrieve after insertion of data in SQL
+        public int SchedulePerfIndexID  //retrieve after insertion of data in SQL
         {
-            get => CostVariance_ID;
-            set => CostVariance_ID = value;
+            get => SchedulePerfIndex_ID;
+            set => SchedulePerfIndex_ID = value;
         }
 
         public double variableEV
@@ -44,31 +44,35 @@ namespace CalculationTool
             set => EV = value;
         }
 
-        public double variableAC
+        public double variablePV
         {
-            get => AC;
-            set => AC = value;
+            get => PV;
+            set => PV = value;
         }
 
-        public double variableCVValue
+        public double variableSPIValue
         {
-            get => CVValue;
-            set => CVValue = value;
+            get => SPIValue;
+            set => SPIValue = value;
         }
 
-        public double calculationSubtraction(double _var1, double _var2)
+        public double calculationDivision(double _var1, double _var2)
         {
             double _calculationResult = 0;
-            EV = _var1;  
-            AC = _var2; 
+            EV = _var1;
+            PV = _var2;
             try
             {
-                _calculationResult = _var1 - _var2;
-                CVValue = _calculationResult;  
+                _calculationResult = _var1 / _var2;
+                SPIValue = _calculationResult;
             }
-            catch (Exception e)
+            catch (DivideByZeroException e)
             {
-                Console.WriteLine("Check format of variables in Sum method, parent calculation" + e.Message);
+                Console.WriteLine("Division by Zero not allowed" + e.Message);
+            }
+            catch (FormatException f)
+            {
+                Console.WriteLine("Check format of variables in Division method, parent calculation");
             }
             return _calculationResult;
         }
@@ -76,10 +80,10 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Cost Variance result:"+
-                                        "\nEarned Value:\t" + EV +
-                                        "\nActual Cost:\t" + AC +
-                                        "\nCost Variance:\t" + CVValue;
+            _calculationResult = "Schedule Performance Index result:" +
+                                        "\nEarned Value:\t\t\t\t" + EV +
+                                        "\nActual Cost:\t\t\t\t" + PV +
+                                        "\nSchedule Performance Index Value:\t" + SPIValue;
 
             return _calculationResult;
         }

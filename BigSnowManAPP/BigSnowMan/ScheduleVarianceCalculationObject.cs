@@ -15,27 +15,27 @@
 
 
 using System;
-using System.Xml.Linq;
+
 
 namespace CalculationTool
 {
-    public class CostVarianceCalculationObject
+    public class ScheduleVarianceCalculationObject
     {
         private int RecordID;
-        private int CostVariance_ID;
+        private int ScheduleVariance_ID;
         private double EV;  //earned value
-        private double AC;  //actual cost
-        private double CVValue;  // Cost Variance result
-  
-        public CostVarianceCalculationObject(int _recID)
+        private double PV;  //planned value
+        private double SVValue;  //schedule variance metric.
+
+        public ScheduleVarianceCalculationObject(int _recID)
         {
             RecordID = _recID;
         }
 
-        public int CostVarianceID  //retrieve after insertion of data in SQL
+        public int ScheduleVarianceID  //retrieve after insertion of data in SQL
         {
-            get => CostVariance_ID;
-            set => CostVariance_ID = value;
+            get => ScheduleVariance_ID;
+            set => ScheduleVariance_ID = value;
         }
 
         public double variableEV
@@ -44,27 +44,27 @@ namespace CalculationTool
             set => EV = value;
         }
 
-        public double variableAC
+        public double variablePV
         {
-            get => AC;
-            set => AC = value;
+            get => PV;
+            set => PV = value;
         }
 
-        public double variableCVValue
+        public double variableSVValue
         {
-            get => CVValue;
-            set => CVValue = value;
+            get => SVValue;
+            set => SVValue = value;
         }
 
         public double calculationSubtraction(double _var1, double _var2)
         {
             double _calculationResult = 0;
             EV = _var1;  
-            AC = _var2; 
+            PV = _var2; 
             try
             {
                 _calculationResult = _var1 - _var2;
-                CVValue = _calculationResult;  
+                SVValue = _calculationResult;  
             }
             catch (Exception e)
             {
@@ -76,10 +76,10 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Cost Variance result:"+
+            _calculationResult = "Schedule Variance result:" +
                                         "\nEarned Value:\t" + EV +
-                                        "\nActual Cost:\t" + AC +
-                                        "\nCost Variance:\t" + CVValue;
+                                        "\nActual Cost:\t" + PV +
+                                        "\nCost Variance:\t" + SVValue;
 
             return _calculationResult;
         }

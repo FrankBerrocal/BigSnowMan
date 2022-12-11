@@ -21,7 +21,7 @@ using Status;
 using Project;
 using Tool;
 using Record;
-using Calculation;
+using CalculationTool;
 
 
 public class Execution : StatusObject
@@ -100,9 +100,48 @@ public class Execution : StatusObject
         RecordObject CostReportLineLH = new RecordObject(ToolID, RecordDate);
         Console.WriteLine(CostReportLineLH.displayRecordInfo() );
 
-        CalculationObject test = new 
 
-            
+        Console.WriteLine("\nCost Variance Definition\n");
+        int costRecordID = 1;
+        CostVarianceCalculationObject CV = new CostVarianceCalculationObject(costRecordID);
+
+        double EV = 50000;
+        double AC = 35000;
+
+
+        CV.calculationSubtraction(EV, AC);
+        Console.WriteLine(CV.displayCalculationResult());
+
+        Console.WriteLine("\nSchedule Variance Definition\n");
+
+        ScheduleVarianceCalculationObject SV = new ScheduleVarianceCalculationObject(costRecordID);
+        double PV = 25590.56;
+
+        SV.calculationSubtraction(EV, PV);
+        Console.WriteLine(  SV.displayCalculationResult());
+
+        Console.WriteLine("\nVariance at Completion Definition\n");
+
+        VarianceCompletionCalculationObject VC = new VarianceCompletionCalculationObject(costRecordID);
+        double BAC = 13000;
+        double EAC = 17000;
+
+        VC.calculationSubtraction(BAC, EAC);
+        Console.WriteLine(VC.displayCalculationResult());
+
+        Console.WriteLine("\nCost Performance Index \n");
+
+        CostPerformanceIndexCalculationObject CPI = new CostPerformanceIndexCalculationObject(costRecordID);
+
+        CPI.calculationDivision(EV, AC);
+        Console.WriteLine(CPI.displayCalculationResult());
+
+        Console.WriteLine("\nSchedule Performance Index \n");
+
+        SchedulePerformanceIndexCalculationObject SPI = new SchedulePerformanceIndexCalculationObject(costRecordID);
+        SPI.calculationDivision(EV, PV);
+
+        Console.WriteLine(SPI.displayCalculationResult());
 
     }
 }
