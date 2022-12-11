@@ -15,56 +15,56 @@
 
 
 using System;
-using System.Xml.Linq;
+
 
 namespace CalculationTool
 {
-    public class CostVarianceCalculationObject
+    public class VarianceCompletionCalculationObject
     {
         private int RecordID;
-        private int CostVariance_ID;
-        private double EV;  //earned value
-        private double AC;  //actual cost
-        private double CVValue;  // Cost Variance result
-  
-        public CostVarianceCalculationObject(int _recID)
+        private int VarianceCompletion_ID;
+        private double BAC;  //budget at completion
+        private double EAC;  //estimate at completion
+        private double VCValue;
+
+        public VarianceCompletionCalculationObject(int _recID)
         {
             RecordID = _recID;
         }
 
-        public int CostVarianceID  //retrieve after insertion of data in SQL
+        public int VarianceCompletionID  //retrieve after insertion of data in SQL
         {
-            get => CostVariance_ID;
-            set => CostVariance_ID = value;
+            get => VarianceCompletion_ID;
+            set => VarianceCompletion_ID = value;
         }
 
-        public double variableEV
+        public double variableBAC
         {
-            get => EV;
-            set => EV = value;
+            get => BAC;
+            set => BAC = value;
         }
 
-        public double variableAC
+        public double variableEAC
         {
-            get => AC;
-            set => AC = value;
+            get => EAC;
+            set => EAC = value;
         }
 
-        public double variableCVValue
+        public double variableVCValue
         {
-            get => CVValue;
-            set => CVValue = value;
+            get => VCValue;
+            set => VCValue = value;
         }
 
         public double calculationSubtraction(double _var1, double _var2)
         {
             double _calculationResult = 0;
-            EV = _var1;  
-            AC = _var2; 
+            BAC = _var1;  
+            EAC = _var2; 
             try
             {
                 _calculationResult = _var1 - _var2;
-                CVValue = _calculationResult;  
+                VCValue = _calculationResult;  
             }
             catch (Exception e)
             {
@@ -76,10 +76,10 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Cost Variance result:"+
-                                        "\nEarned Value:\t" + EV +
-                                        "\nActual Cost:\t" + AC +
-                                        "\nCost Variance:\t" + CVValue;
+            _calculationResult = "Variance at Completion result:" +
+                                        "\nBudget at Completion Value:\t" + BAC +
+                                        "\nEstimated at Completion Value:\t" + EAC +
+                                        "\nVariance at Completion:\t\t" + VCValue;
 
             return _calculationResult;
         }
