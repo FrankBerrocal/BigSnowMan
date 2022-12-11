@@ -23,7 +23,7 @@ namespace Status
     public class StatusObject
     {
 
-        public StatusObject()
+        public StatusObject()  //persistent data, no need to receive the descriptors everytime
         {
             CreateStatus();
         }
@@ -52,20 +52,6 @@ namespace Status
 
             return Status;
         }
-
-        public string GetStatusKey(Dictionary<OptionObject<string>, int> _status, int _position)
-        {
-            string statusKey = _status.Keys.ElementAt(_position).Description;
-            return statusKey;
-        }
-
-        public int GetStatusValue(Dictionary<OptionObject<string>, int> _status, int _position)
-        {
-            int statusValue = _status.Values.ElementAt(_position);
-            return statusValue;
-        }
-
-
 
         public void DisplayStatus(Dictionary<OptionObject<string>, int> _status)
         {

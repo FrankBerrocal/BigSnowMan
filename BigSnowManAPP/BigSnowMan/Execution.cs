@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*****************************************************************
+ * Project Management Office Evaluation System (Prototype)       
+ * PMOES                                                                               
+ *                                                                                           
+ * Final Project                                                                                                                                       
+ *                                                                                            
+ * Frank Berrocal - 427887                                                      
+ * SODV2202 - Object Oriented Programming                            
+ * Prof.  Dr. Sohaib Bajwa                                                         
+ *                                
+ * 
+ * Bow Valley College
+ * December 2022
+ ******************************************************************/
+
+
+using System;
 using System.Collections.Generic;
 using BigSnowMan;
 using Status;
@@ -25,9 +41,6 @@ using Project;
 
 
 
-
-
-
             Console.WriteLine("\nTypes");
             //Creation of list of type descriptions
             Dictionary<OptionObject<string>, int> Type = new Dictionary<OptionObject<string>, int>();
@@ -38,7 +51,6 @@ using Project;
 
 			TypeCreation.DisplayType(Type); //display elements
 
-			
 
 
             Console.WriteLine("\nKnowledge Areas");
@@ -52,29 +64,21 @@ using Project;
            KAreaCreation.DisplayKArea(KArea);  //display elements
 
 
-			
+            string ProjectName = "Lighthouse";
+            string ProjectDescription = "Accountig project for Nest Consultants";
+            var ProjectStartDate = new DateOnly(2022, 12, 08);
+            var ProjectExpEndDate = new DateOnly(2023, 12, 08);
+            var ProjectRealEndDate = ProjectExpEndDate;
 
-			//ProjectObject project = new ProjectObject(Status, Type);
+            var StatusID = 5;  //active status as default
+            var ProjectStatus = Status;
+            var TypeID = 4;  //active status as default
+            var ProjectType = Type;
 
+            ProjectObject Proyecto = new ProjectObject(ProjectName, ProjectDescription, ProjectStartDate, ProjectExpEndDate, ProjectRealEndDate, ProjectStatus, StatusID, ProjectType, TypeID);
 
-
-
-
-        string ProjectName = "Lighthouse";
-        string ProjectDescription = "Accountig project for Nest Consultants";
-        var ProjectStartDate = new DateOnly(2022, 12, 08);
-        var ProjectExpEndDate = new DateOnly(2023, 12, 08);
-        var ProjectRealEndDate = ProjectExpEndDate;
-
-        var StatusID = 5;  //active status as default
-        var ProjectStatus = Status;
-        var TypeID = 4;  //active status as default
-        var ProjectType = Type;
-
-        ProjectObject Proyecto = new ProjectObject(ProjectName, ProjectDescription, ProjectStartDate, ProjectExpEndDate, ProjectRealEndDate, ProjectStatus, StatusID, ProjectType, TypeID);
-
-        Console.WriteLine(Proyecto.ProjectStatusDisplay(StatusID) );
-        Console.WriteLine(Proyecto.ProjectType.Keys.ElementAt(1).Description);
+            Console.WriteLine(Proyecto.ProjectStatusDisplay(StatusID) );
+            Console.WriteLine(Proyecto.ProjectType.Keys.ElementAt(6).Description);
 
         
 
@@ -87,7 +91,8 @@ using Project;
  * Reaching the Objects inside the Dictionary 
  * Console.WriteLine(	 Status.Keys.ElementAt(1));
  * Console.WriteLine(	 Status.Keys.ElementAt(1).Option.ToString());
- * 
+ * Proyecto.ProjectStatusDisplay(StatusID) 
+ * Proyecto.ProjectType.Keys.ElementAt(1).Description
  * 
  * 
  */

@@ -20,7 +20,7 @@ using BigSnowMan;
 public class KAreaObject
 {
 
-    public KAreaObject()
+    public KAreaObject()  //persistent data, no need to receive the descriptors everytime
     {
         CreateKArea();
     }

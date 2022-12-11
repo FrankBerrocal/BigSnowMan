@@ -20,7 +20,7 @@ using BigSnowMan;
 public class TypeObject
 {
 
-    public TypeObject()
+    public TypeObject()  //persistent data, no need to receive the descriptors everytime
     {
         CreateType();
     }

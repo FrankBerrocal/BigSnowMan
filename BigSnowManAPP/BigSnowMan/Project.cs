@@ -23,9 +23,8 @@ using Status;
 
 namespace Project
 {
-    public class ProjectObject
-    {
-
+    public class ProjectObject : ProjectInterface
+    { 
         private string Name; 
         private string Description;
         private DateOnly StartDate;
