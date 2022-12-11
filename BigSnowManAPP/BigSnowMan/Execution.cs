@@ -21,7 +21,7 @@ using Status;
 using Project;
 using Tool;
 using Record;
-using Calculation;
+using CalculationTool;
 
 
 public class Execution : StatusObject
@@ -100,7 +100,19 @@ public class Execution : StatusObject
         RecordObject CostReportLineLH = new RecordObject(ToolID, RecordDate);
         Console.WriteLine(CostReportLineLH.displayRecordInfo() );
 
-        CalculationObject test = new 
+
+        Console.WriteLine("\nRecord Definition\n");
+        int costRecordID = 1;
+        CostVarianceCalculationObject CV = new CostVarianceCalculationObject(costRecordID);
+
+        float EV = 50000;
+        float AC = 35000;
+        float CostVariance;
+
+        CV.calculationSubtraction(EV, AC);
+        Console.WriteLine(CV.displayCalculationResult());
+
+
 
             
 
