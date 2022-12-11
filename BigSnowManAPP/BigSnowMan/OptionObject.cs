@@ -1,39 +1,46 @@
-﻿/*****************************************************************
- * Project Management Office Evaluation System (Prototype)       
- * PMOES                                                                               
- *                                                                                           
- * Final Project                                                                                                                                       
- *                                                                                            
- * Frank Berrocal - 427887                                                      
- * SODV2202 - Object Oriented Programming                            
- * Prof.  Dr. Sohaib Bajwa                                                         
- *                                
- * 
- * Bow Valley College
- * December 2022
- ******************************************************************/
+﻿using System;
+using System.Collections.Generic;
 
 
-using System;
 
-namespace BigSnowMan
+public class OptionObject<OptionDesc>
 {
-	public class OptionObject<T>
-	{
-		
-        private T Option; // field
+    public OptionDesc Option;
+    
 
-        public OptionObject(T _option)
-        {
-            Option = _option;
-        }
+    public OptionObject(OptionDesc _option)
+    {
+        Option = _option;
+    }
 
-        public T Description
-        // property
-        {
-            get { return Option; }
-            set { Option = value; }
-        }
+    public override string ToString() => String.Format(Option.ToString());  
+}
+
+
+
+//Generic objects to replace multiple entities used to create selection elements, like status and project type.  
+
+
+//Regular encapsulation code.
+
+/*
+public class StatusObject
+{
+    public string Status;
+
+
+    public StatusObject(String _status)
+    {
+        Status = _status;
+    }
+    public string getStatus()
+    {
+        return Status;
+    }
+    public override string ToString()
+    {
+        return Status;
     }
 }
+*/
 
