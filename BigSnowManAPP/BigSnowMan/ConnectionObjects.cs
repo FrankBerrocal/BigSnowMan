@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Text;
 using System.Data.SqlClient;
-/*
+
 namespace SqlServerSample
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Maintest(string[] args)
         {
             try
             {
                 Console.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
-
+                //user connection.
                 // Build connection string
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost, 1440";
-                builder.UserID = "sa";
-                builder.Password = "myPassw0rd";
-                builder.InitialCatalog = "master";
+                builder.DataSource = "localhost, 1440"; //parameter
+                builder.UserID = "sa";   //parameter
+                builder.Password = "myPassw0rd";  //parameter
+                builder.InitialCatalog = "master";  //parameter
 
                 // Connect to SQL
                 Console.Write("Connecting to SQL Server ... ");
@@ -150,4 +150,4 @@ namespace SqlServerSample
 
         }
     }
-}*/
+}

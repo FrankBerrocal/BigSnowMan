@@ -44,7 +44,7 @@ namespace Selection
             Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
             StatusObject StatusCreation = new StatusObject();
             Status = StatusCreation.CreateStatus();
-            //StatusCreation.DisplayStatus(Status); //display elements
+            StatusCreation.DisplayStatus(Status); //display elements
 
             return Status;
         }

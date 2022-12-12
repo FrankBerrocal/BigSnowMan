@@ -23,12 +23,16 @@ using Tool;
 using Record;
 using CalculationTool;
 using Selection;
+using SQLConnectionBuilder;
 
 
 public class Execution 
 {
 	static void Main(string[] args)
 	{
+
+        ConnectionBuilder Builder = new ConnectionBuilder("localhost, 1440", "sa", "myPassw0rd", "master");
+
         //Database Ulysses = new Database();
 
         //Creation of all persistent selection objects
@@ -82,12 +86,6 @@ public class Execution
 
         DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
         Proyecto.getCostReport().RecordLineCreation(2, _date);
-
-
-
-
-
-        
 
     }
 }
