@@ -28,68 +28,102 @@ namespace Tool
 		private int ID;  //id in SQL, retrieved after creation, SQL Identity is on.
         private int ProjectID;
         private DateOnly Date;
-        private int TypeID;
+        private int ToolTypeID;
+        private RecordObject RecordLine;
+
+        //selection objects
         private Dictionary<OptionObject<string>, int> ToolType;  //name of entity in SQL
         private int ToolKAID;
         private Dictionary<OptionObject<string>, int> ToolKA;   //Knowledge Area
-
 
         public ToolObject(int _projectId, DateOnly _date, Dictionary<OptionObject<string>, int> _toolType, int _typeId, Dictionary<OptionObject<string>, int> _toolKA, int _toolKDid)
 		{
             ProjectID = _projectId;
             Date = _date;
-            TypeID = _typeId;
+            ToolTypeID = _typeId;
             ToolType = _toolType;
             ToolKAID = _toolKDid;
             ToolKA = _toolKA;
-		}
+            RecordLine = RecordLineCreation(ID, Date);
 
-		public int ToolID //retrieve after insertion of data in SQL
+            //this should be substituted by information from SQL Server
+            RecordLine.RecordID = 1;
+        }
+
+        public int ToolIDGS //retrieve after insertion of data in SQL
         {
             get => ID;
             set => ID = value;
         }
 
-        public DateOnly ToolDate
+        public int ProjectIDGS //retrieve after insertion of data in SQL
+        {
+            get => ProjectID;
+            set => ProjectID = value;
+        }
+
+        public DateOnly ToolDateGS
         {
             get => Date;
             set => Date = value;
         }
 
-        public int ToolTypeID
+        public int ToolTypeIDGS
         {
-            get => TypeID;
-            set => TypeID = value;
+            get => ToolTypeID;
+            set => ToolTypeID = value;
         }
 
-        public Dictionary<OptionObject<string>, int> ProjectTool
+        public Dictionary<OptionObject<string>, int> ToolTypeGS
         {
             get => ToolType;
             set => ToolType = value;
         }
 
-        public Dictionary<OptionObject<string>, int> ToolKnowledgeArea
+        public int ToolKAIDGS
+        {
+            get => ToolKAID;
+            set => ToolKAID = value;
+        }
+
+        public Dictionary<OptionObject<string>, int> ToolKnowledgeAreaGS
         {
             get => ToolKA;
             set => ToolKA = value;
         }
 
+        public RecordObject RecordLineCreation(int _id, DateOnly _date)
+        {
+            RecordObject _recordLine = new RecordObject(_id, _date);
+            return _recordLine;
+        }
+
+        public RecordObject getRecordLineObject()
+        {
+            return RecordLine;
+        }
+
+        public string getRecordLineInfo()
+        {
+            return RecordLine.displayRecordInfo();
+        }
+
         public string ToolTypeDisplay()
         {
-            string _toolName = ToolType.Keys.ElementAt(TypeID).Description;
+            string _toolName = ToolType.Keys.ElementAt(ToolTypeID).Description;
             return _toolName;
         }
 
         public string KnowledgeAreaDisplay()
         {
-            string _areaName = ToolKA.Keys.ElementAt(TypeID).Description;
+            string _areaName = ToolKA.Keys.ElementAt(ToolTypeID).Description;
             return _areaName;
         }
 
         public string displayToolInfo()
 		{
             string _toolInfo;
-            _toolInfo = "Name of tool: " + ToolType.Keys.ElementAt(TypeID).Description +
+            _toolInfo = "\nName of tool: " + ToolType.Keys.ElementAt(ToolTypeID).Description +
                                     "\nfor project " + ProjectID +
                                     ".\nCreated on: " + Date +
                                     ".\nKnowledge area: " + ToolKA.Keys.ElementAt(ToolKAID).Description;

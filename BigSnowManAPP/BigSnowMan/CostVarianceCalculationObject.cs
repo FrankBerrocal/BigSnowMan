@@ -59,6 +59,7 @@ namespace CalculationTool
         public double calculationSubtraction(double _var1, double _var2)
         {
             double _calculationResult = 0;
+            
             EV = _var1;  
             AC = _var2; 
             try
@@ -76,10 +77,11 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Cost Variance result:"+
-                                        "\nEarned Value:\t" + EV +
-                                        "\nActual Cost:\t" + AC +
-                                        "\nCost Variance:\t" + CVValue;
+
+            _calculationResult = "\n\nCost Variance result:" +
+                                    "\nEarned Value:\t" + EV +
+                                    "\nActual Cost:\t" + AC +
+                                    "\nCost Variance:\t" + CVValue;
 
             return _calculationResult;
         }

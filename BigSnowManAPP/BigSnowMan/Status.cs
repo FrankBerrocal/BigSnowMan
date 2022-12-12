@@ -48,7 +48,6 @@ namespace Status
             Status.Add(OnHold, 6);
             Status.Add(UnderReview, 7);
 
-            string test = Status.Keys.ElementAt(1).Description;
 
             return Status;
         }

@@ -15,21 +15,50 @@
 
 
 using System;
+using CalculationTool;
 
 
 namespace Record
 {
 	public class RecordObject 
 	{
+        
+
 		private int ToolObjectID;
         private int ID;
 		private DateOnly Date;
 
+        //Calculations
+        CostVarianceCalculationObject CV;
+        ScheduleVarianceCalculationObject SV;
+        VarianceCompletionCalculationObject VC;
+        CostPerformanceIndexCalculationObject CPI;
+        SchedulePerformanceIndexCalculationObject SPI;
 
-		public RecordObject(int _toollobjectId, DateOnly _date)
+        //delegates
+        delegate CostVarianceCalculationObject CVDelegate(int _id); //class delegate
+        delegate ScheduleVarianceCalculationObject SVDelegate(int _id);
+        delegate VarianceCompletionCalculationObject VCDelegate(int _id);
+        delegate CostPerformanceIndexCalculationObject CPIDelegate(int _id);
+        delegate SchedulePerformanceIndexCalculationObject SPIDelegate(int _id);
+
+
+        public RecordObject(int _toollobjectId, DateOnly _date)
 		{
             ID = _toollobjectId;
             Date = _date;
+            CVDelegate cv = new CVDelegate(CVcreation);  //new object delegate with method as parameter
+            SVDelegate sv = new SVDelegate(SVcreation);  
+            VCDelegate vc = new VCDelegate(VCcreation);  
+            CPIDelegate cpi = new CPIDelegate(CPIcreation);  
+            SPIDelegate spi = new SPIDelegate(SPIcreation);  
+
+            CV = cv(ID);
+            SV = sv(ID);
+            VC = vc(ID);
+            CPI = cpi(ID);
+            SPI = spi(ID);
+
         }
 
         public int ToolID  
@@ -49,15 +78,61 @@ namespace Record
             set => Date = value;
         }
 
+        public CostVarianceCalculationObject getCostVarianceObject()
+        {
+            return CV;
+        }
+
+        public string GetCostVarianceInfo()
+        {
+            return CV.displayCalculationResult();
+        }
+
         public string displayRecordInfo()
         {
             string _recordInfo;
-            _recordInfo = "Record ID: " + ID +
-                                    ".\nCreated on: " + Date +".";
+            _recordInfo = "\n\nRecord ID: " + ID +
+                                    ".\nCreated on: " + Date + "." +
+                                    "\n\nCost Variation Calculation: " +
+                                    CV.displayCalculationResult()+
+                                    SV.displayCalculationResult()+
+                                    VC.displayCalculationResult()+
+                                    CPI.displayCalculationResult()+
+                                    SPI.displayCalculationResult();
+            //include here all information from calculations.
             return _recordInfo;
         }
 
         //create calculations
+        public CostVarianceCalculationObject CVcreation(int _id)
+        {
+            CostVarianceCalculationObject _cv = new CostVarianceCalculationObject(_id);
+            return _cv;
+        }
+
+        public ScheduleVarianceCalculationObject SVcreation(int _id)
+        {
+            ScheduleVarianceCalculationObject _sv = new ScheduleVarianceCalculationObject(_id);
+            return _sv;
+        }
+
+        public VarianceCompletionCalculationObject VCcreation(int _id)
+        {
+            VarianceCompletionCalculationObject _vc = new VarianceCompletionCalculationObject(_id);
+            return _vc;
+        }
+
+        public CostPerformanceIndexCalculationObject CPIcreation(int _id)
+        {
+            CostPerformanceIndexCalculationObject _cv = new CostPerformanceIndexCalculationObject(_id);
+            return _cv;
+        }
+
+        public SchedulePerformanceIndexCalculationObject SPIcreation(int _id)
+        {
+            SchedulePerformanceIndexCalculationObject _cv = new SchedulePerformanceIndexCalculationObject(_id);
+            return _cv;
+        }
     }
 }
 
