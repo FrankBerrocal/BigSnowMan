@@ -21,6 +21,7 @@ using System.Runtime.Serialization;
 using BigSnowMan;
 using Status;
 using Tool;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Project
 {
@@ -32,16 +33,35 @@ namespace Project
         private DateOnly StartDate;
         private DateOnly ExpEndDate;
         private DateOnly RealEndDate;
-        //private string CostReport;
+        private ToolObject CostReport;
+
+        //all selection objects
         private int StatusID;
         private Dictionary<OptionObject<string>, int> Status;
-        private int TypeID;
+        private int ProjectTypeID;
         private Dictionary<OptionObject<string>, int> Type;
+        private int ToolTypeID;
+        private Dictionary<OptionObject<string>, int> ToolType; 
+        private int ToolKAID;
+        private Dictionary<OptionObject<string>, int> ToolKA;   
 
 
 
 
-        public ProjectObject(string _name, string _desc, DateOnly _startDate, DateOnly _expEndDate, DateOnly _readlEndDate, Dictionary<OptionObject<string>, int> _status, int _statusID, Dictionary<OptionObject<string>, int> _type, int _typeID)
+
+        public ProjectObject(string _name,
+                                        string _desc,
+                                        DateOnly _startDate,
+                                        DateOnly _expEndDate,
+                                        DateOnly _readlEndDate,
+                                        Dictionary<OptionObject<string>, int> _status,
+                                        int _statusID,
+                                        Dictionary<OptionObject<string>, int> _type,
+                                        int _typeID,
+                                        Dictionary<OptionObject<string>, int> _toolType,
+                                        int _toolTypeId,
+                                        Dictionary<OptionObject<string>, int> _toolKA,
+                                        int _toolKAid)
         {
             Name = _name;
             Description = _desc;
@@ -51,46 +71,101 @@ namespace Project
             RealEndDate = _readlEndDate;
             StatusID = _statusID;
             Status = _status;
-            TypeID = _typeID;
+            ProjectTypeID = _typeID;
             Type = _type;
+            ToolType = _toolType;
+            ToolTypeID = _toolTypeId;
+            ToolKA = _toolKA;
+            ToolKAID = _toolKAid;
+            CostReport = CreateCostReport();
+
+            //this should be substituted by information from SQL Server
+            CostReport.ProjectIDGS = 1;
+
+
+
 
         }
 
-        public int ProjectID  //retrieve after insertion of data in SQL
+        public int ProjectIDGS  //retrieve after insertion of data in SQL
         {
             get => ID;
             set => ID = value;
         }
 
-        public string ProjectName
+        public string ProjectNameGS
         {
-            get =>Name;
+            get => Name;
             set => Name = value;
         }
 
-        public string ProjectDescription
+        public string ProjectDescriptionGS
         {
             get => Description;
             set => Description = value;
         }
 
-        public DateOnly ProjectStartDate
+        public DateOnly ProjectStartDateGS
         {
             get => StartDate;
             set => StartDate = value;
         }
 
-        public DateOnly ProjectExpectedEndDate
+        public DateOnly ProjectExpectedEndDateGS
         {
             get => ExpEndDate;
             set => ExpEndDate = value;
         }
 
-        public DateOnly ProjectRealEndDate
+        public DateOnly ProjectRealEndDateGS
         {
             get => RealEndDate;
             set => RealEndDate = value;
         }
+
+        private int CostReportGS_ID
+        {
+            get => CostReport.ToolIDGS;
+            set => CostReport.ToolIDGS = value;
+        }
+
+        private int CostReportGS_ProjectID
+        {
+            get => CostReport.ProjectIDGS;
+            set => CostReport.ProjectIDGS = value;
+        }
+
+        private DateOnly CostReportGS_Date
+        {
+            get => CostReport.ToolDateGS;
+            set => CostReport.ToolDateGS = value;
+        }
+
+        private int CostReportGS_ToolTypeID
+        {
+            get => CostReport.ToolTypeIDGS;
+            set => CostReport.ToolTypeIDGS = value;
+        }
+
+        private Dictionary<OptionObject<string>, int> ToolTypeGS
+        {
+            get => CostReport.ToolTypeGS;
+            set => CostReport.ToolTypeGS = value;
+        }
+
+        private int CostReportGS_ToolKAID
+        {
+            get => CostReport.ToolKAIDGS;
+            set => CostReport.ToolKAIDGS = value;
+        }
+
+        private Dictionary<OptionObject<string>, int> ToolKnowledgeAreaGS
+        {
+            get => CostReport.ToolKnowledgeAreaGS;
+            set => CostReport.ToolKnowledgeAreaGS = value;
+        }
+
+
 
         public int ProjectStatusID
         {
@@ -98,22 +173,34 @@ namespace Project
             set => StatusID = value;
         }
 
-        public int ProjectTypeID
+        public int ProjectTypeIDGS
         {
-            get => TypeID;
-            set => TypeID = value;
+            get => ProjectTypeID;
+            set => ProjectTypeID = value;
         }
 
-        public Dictionary<OptionObject<string>, int> ProjectStatus
+        public Dictionary<OptionObject<string>, int> ProjectStatusGS
         {
             get => Status;
             set => Status = value;
         }
 
-        public Dictionary<OptionObject<string>, int> ProjectType
+        public Dictionary<OptionObject<string>, int> ProjectTypeGS
         {
             get => Type;
             set => Type = value;
+        }
+
+       public ToolObject CreateCostReport()
+        {
+            DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+            ToolObject _costReport = new ToolObject(ID, _date, ToolType, ToolTypeID, ToolKA, ToolKAID);
+            return _costReport;
+        }
+
+        public ToolObject getCostReport()
+        {
+            return CostReport;
         }
 
         public string ProjectStatusDisplay()
@@ -124,19 +211,23 @@ namespace Project
 
         public string ProjectTypeDisplay()
         {
-            string statusName = Type.Keys.ElementAt(TypeID).Description;
-            return statusName;
+            string typeName = Type.Keys.ElementAt(ProjectTypeID).Description;
+            return typeName;
         }
 
         public string ProjectInfoDisplay()
         {
             string _projectInfo;
-            _projectInfo=   "Name of Project: " + Name +
-                                    ",\n"+Description+
+            _projectInfo = "Name of Project: " + Name +
+                                    ",\n" + Description +
                                     ".\nCreated on: " + StartDate +
                                     ",\nwith expected end date: " + ExpEndDate +
-                                    ".\nProject "+Name+ "  is type " + ProjectTypeDisplay() +
-                                    ",\nand the current stats is " + ProjectStatusDisplay();
+                                    ".\nProject " + Name + "  is type " + ProjectTypeDisplay() +
+                                    ",\nand the current stats is " + ProjectStatusDisplay() +
+                                    "\n\nCost Report information: " +
+                                    CostReport.displayToolInfo() +
+                                    CostReport.getRecordLineObject().displayRecordInfo();
+                                   
 
 
             return _projectInfo;
@@ -145,3 +236,11 @@ namespace Project
     }
 }
 
+/*
+ * References
+ * DateOnly.FromDateTime:  https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.fromdatetime?view=net-7.0
+ * 
+ * 
+ * 
+ * 
+ */

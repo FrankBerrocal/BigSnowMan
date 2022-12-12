@@ -72,7 +72,7 @@ namespace CalculationTool
             }
             catch(FormatException f)
             {
-                Console.WriteLine("Check format of variables in Division method, parent calculation");
+                Console.WriteLine("Check format of variables in Division method, parent calculation" +f.Message);
             }
             return _calculationResult;
         }
@@ -80,7 +80,7 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Cost Performance Index result:" +
+            _calculationResult = "\n\nCost Performance Index result:" +
                                         "\nEarned Value:\t\t\t" + EV +
                                         "\nActual Cost Value:\t\t" + AC +
                                         "\nCost Perfornance Index Value:\t" + CPIValue;

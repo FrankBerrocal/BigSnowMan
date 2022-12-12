@@ -76,7 +76,7 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Schedule Variance result:" +
+            _calculationResult = "\n\nSchedule Variance result:" +
                                         "\nEarned Value:\t" + EV +
                                         "\nActual Cost:\t" + PV +
                                         "\nCost Variance:\t" + SVValue;

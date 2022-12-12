@@ -22,126 +22,72 @@ using Project;
 using Tool;
 using Record;
 using CalculationTool;
+using Selection;
 
 
-public class Execution : StatusObject
+public class Execution 
 {
 	static void Main(string[] args)
 	{
         //Database Ulysses = new Database();
 
-        Console.WriteLine("\nStatus:\n");
-        //Creation of list of status descriptions
+        //Creation of all persistent selection objects
         Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
-        StatusObject StatusCreation = new StatusObject();
-        Status = StatusCreation.CreateStatus();
-        StatusCreation.DisplayStatus(Status); //display elements
+        SelectionObjects _status = new SelectionObjects();
+        Status = _status.createSelectionObjectStatus();
 
-        Console.WriteLine("\nTypes:\n");
-        //Creation of list of type descriptions
         Dictionary<OptionObject<string>, int> Type = new Dictionary<OptionObject<string>, int>();
-        TypeObject TypeCreation = new TypeObject();
-        Type = TypeCreation.CreateType();
-        TypeCreation.DisplayType(Type); //display elements
+        SelectionObjects _type = new SelectionObjects();
+        Type = _type.createSelectionObjectType();
 
-        Console.WriteLine("\nKnowledge Areas:\n");
-        //Creation of list of type descriptions
         Dictionary<OptionObject<string>, int> KArea = new Dictionary<OptionObject<string>, int>();
-        KAreaObject KAreaCreation = new KAreaObject();
-        KArea = KAreaCreation.CreateKArea();
-        KAreaCreation.DisplayKArea(KArea);  //display elements
+        SelectionObjects _karea= new SelectionObjects();
+        KArea = _karea.createSelectionObjectKnowledgeArea();
 
-        Console.WriteLine("\nTool Types:\n");
-        //Creation of list of type descriptions
         Dictionary<OptionObject<string>, int> Tool = new Dictionary<OptionObject<string>, int>();
-        ToolType ToolTypesCreation = new ToolType();
-        Tool = ToolTypesCreation.CreateToolType();
-        ToolTypesCreation.DisplayTool(Tool);  //display elements
+        SelectionObjects _tool = new SelectionObjects();
+        Tool = _tool.createSelectionObjectTool();
+
+
 
         Console.WriteLine("\nProject Definition\n");
+
         string ProjectName = "Lighthouse";
-        string ProjectDescription = "Accountig project for Nest Consultants";
+        string ProjectDescription = "Accounting project for Nest Consultants";
         var ProjectStartDate = new DateOnly(2022, 12, 08);
         var ProjectExpEndDate = new DateOnly(2023, 12, 08);
         var ProjectRealEndDate = ProjectExpEndDate;
         var StatusID = 4;  //active status as default
-        var TypeID = 4;  //active status as default
+        var ProjectTypeID = 4;  //active status as default
+        var ToolTypeID= 0;  //cost report
+        var KAreaID = 3; //cost
+
 
         //Status and Type send as parameters
-        ProjectObject Proyecto = new ProjectObject(ProjectName, ProjectDescription, ProjectStartDate, ProjectExpEndDate, ProjectRealEndDate, Status, StatusID, Type, TypeID);
-
-        Console.WriteLine("\nProject output:\n");
-        Console.WriteLine(Proyecto.ProjectStatusDisplay() );
-        Console.WriteLine(Proyecto.ProjectType.Keys.ElementAt(1).Description ); 
-        Proyecto.ProjectStatusID = 0;  //status change
-        Console.WriteLine(Proyecto.ProjectStatusDisplay());
+        ProjectObject Proyecto = new ProjectObject(  ProjectName,
+                                                                            ProjectDescription,
+                                                                            ProjectStartDate,
+                                                                            ProjectExpEndDate,
+                                                                            ProjectRealEndDate,
+                                                                            Status,
+                                                                            StatusID,
+                                                                            Type,
+                                                                            ProjectTypeID,
+                                                                            Tool,
+                                                                            ToolTypeID,
+                                                                            KArea,
+                                                                            KAreaID);
 
         Console.WriteLine(Proyecto.ProjectInfoDisplay());
 
-        Console.WriteLine("\nTool Definition\n");
-        int ProjectID = 1;
-        int ToolTypeID = 0;
-        int ToolKAID = 3;
-        DateOnly ToolDate = new DateOnly(2022, 12, 11);
-
-
-        //Tool and KArea sent as parameters
-        ToolObject CostReportLH = new ToolObject(ProjectID, ToolDate, Tool, ToolTypeID, KArea, ToolKAID);
-
-        Console.WriteLine("\nTool output:\n");
-        Console.WriteLine(CostReportLH.displayToolInfo());
+        DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+        Proyecto.getCostReport().RecordLineCreation(2, _date);
 
 
 
-        Console.WriteLine("\nRecord Definition\n");
-        int ToolID = 1;
-        DateOnly RecordDate = new DateOnly(2022, 12, 11);
-
-        RecordObject CostReportLineLH = new RecordObject(ToolID, RecordDate);
-        Console.WriteLine(CostReportLineLH.displayRecordInfo() );
 
 
-        Console.WriteLine("\nCost Variance Definition\n");
-        int costRecordID = 1;
-        CostVarianceCalculationObject CV = new CostVarianceCalculationObject(costRecordID);
-
-        double EV = 50000;
-        double AC = 35000;
-
-
-        CV.calculationSubtraction(EV, AC);
-        Console.WriteLine(CV.displayCalculationResult());
-
-        Console.WriteLine("\nSchedule Variance Definition\n");
-
-        ScheduleVarianceCalculationObject SV = new ScheduleVarianceCalculationObject(costRecordID);
-        double PV = 25590.56;
-
-        SV.calculationSubtraction(EV, PV);
-        Console.WriteLine(  SV.displayCalculationResult());
-
-        Console.WriteLine("\nVariance at Completion Definition\n");
-
-        VarianceCompletionCalculationObject VC = new VarianceCompletionCalculationObject(costRecordID);
-        double BAC = 13000;
-        double EAC = 17000;
-
-        VC.calculationSubtraction(BAC, EAC);
-        Console.WriteLine(VC.displayCalculationResult());
-
-        Console.WriteLine("\nCost Performance Index \n");
-
-        CostPerformanceIndexCalculationObject CPI = new CostPerformanceIndexCalculationObject(costRecordID);
-
-        CPI.calculationDivision(EV, AC);
-        Console.WriteLine(CPI.displayCalculationResult());
-
-        Console.WriteLine("\nSchedule Performance Index \n");
-
-        SchedulePerformanceIndexCalculationObject SPI = new SchedulePerformanceIndexCalculationObject(costRecordID);
-        SPI.calculationDivision(EV, PV);
-
-        Console.WriteLine(SPI.displayCalculationResult());
+        
 
     }
 }
@@ -157,3 +103,80 @@ public class Execution : StatusObject
  * 
  * 
  */
+
+
+/*  TEST CODE
+ *  
+ *          //Console.WriteLine(Proyecto.ProjectInfoDisplay());
+            //Console.WriteLine("\nProject output:\n");
+            //Console.WriteLine(Proyecto.ProjectStatusDisplay() );
+            //Console.WriteLine(Proyecto.ProjectTypeGS.Keys.ElementAt(1).Description ); 
+            //Proyecto.ProjectStatusID = 0;  //status change
+            // Console.WriteLine(Proyecto.ProjectStatusDisplay());
+
+                Console.WriteLine("\nTool Definition\n");
+                int ProjectID = 1;
+               // int ToolTypeID = 0;
+                int ToolKAID = 3;
+                DateOnly ToolDate = new DateOnly(2022, 12, 11);
+
+
+                //Tool and KArea sent as parameters
+                ToolObject CostReportLH = new ToolObject(ProjectID, ToolDate, Tool, ToolTypeID, KArea, ToolKAID);
+
+                Console.WriteLine("\nTool output:\n");
+                Console.WriteLine(CostReportLH.displayToolInfo());
+                CostReportLH.ProjectIDGS = 5;
+                Console.WriteLine(CostReportLH.ProjectIDGS);
+                CostReportLH.ToolTypeIDGS = 1;
+
+                Console.WriteLine("\nRecord Definition\n");
+                int ToolID = 1;
+                DateOnly RecordDate = new DateOnly(2022, 12, 11);
+
+                RecordObject CostReportLineLH = new RecordObject(ToolID, RecordDate);
+                Console.WriteLine(CostReportLineLH.displayRecordInfo() );
+
+
+                Console.WriteLine("\nCost Variance Definition\n");
+                int costRecordID = 1;
+                CostVarianceCalculationObject CV = new CostVarianceCalculationObject(costRecordID);
+
+                double EV = 50000;
+                double AC = 35000;
+
+
+                CV.calculationSubtraction(EV, AC);
+                Console.WriteLine(CV.displayCalculationResult());
+
+                Console.WriteLine("\nSchedule Variance Definition\n");
+
+                ScheduleVarianceCalculationObject SV = new ScheduleVarianceCalculationObject(costRecordID);
+                double PV = 25590.56;
+
+                SV.calculationSubtraction(EV, PV);
+                Console.WriteLine(  SV.displayCalculationResult());
+
+                Console.WriteLine("\nVariance at Completion Definition\n");
+
+                VarianceCompletionCalculationObject VC = new VarianceCompletionCalculationObject(costRecordID);
+                double BAC = 13000;
+                double EAC = 17000;
+
+                VC.calculationSubtraction(BAC, EAC);
+                Console.WriteLine(VC.displayCalculationResult());
+
+                Console.WriteLine("\nCost Performance Index \n");
+
+                CostPerformanceIndexCalculationObject CPI = new CostPerformanceIndexCalculationObject(costRecordID);
+
+                CPI.calculationDivision(EV, AC);
+                Console.WriteLine(CPI.displayCalculationResult());
+
+                Console.WriteLine("\nSchedule Performance Index \n");
+
+                SchedulePerformanceIndexCalculationObject SPI = new SchedulePerformanceIndexCalculationObject(costRecordID);
+                SPI.calculationDivision(EV, PV);
+
+                Console.WriteLine(SPI.displayCalculationResult());
+        */

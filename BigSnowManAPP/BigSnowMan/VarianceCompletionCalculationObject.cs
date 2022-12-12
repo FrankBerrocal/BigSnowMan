@@ -76,7 +76,7 @@ namespace CalculationTool
         public string displayCalculationResult()
         {
             string _calculationResult;
-            _calculationResult = "Variance at Completion result:" +
+            _calculationResult = "\n\nVariance at Completion result:" +
                                         "\nBudget at Completion Value:\t" + BAC +
                                         "\nEstimated at Completion Value:\t" + EAC +
                                         "\nVariance at Completion:\t\t" + VCValue;
