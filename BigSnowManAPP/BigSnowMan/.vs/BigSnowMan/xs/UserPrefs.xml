@@ -1,34 +1,30 @@
 ﻿<Properties StartupConfiguration="{21DB3074-631E-40A8-AC58-75DC83694E03}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CostVarianceCalculationObject.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.BigSnowMan PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Execution.cs">
     <Files>
-      <File FileName="BuilderObject.cs" />
-      <File FileName="ConnectionObjects.cs" />
-      <File FileName="Database_Creation.cs" />
-      <File FileName="Database.cs" />
-      <File FileName="Execution.cs" />
-      <File FileName="Status.cs" />
-      <File FileName="KnowledgeArea.cs" />
-      <File FileName="ProjectType.cs" />
-      <File FileName="OptionObject.cs" />
-      <File FileName="ProjectInterface.cs" />
-      <File FileName="Project.cs" />
-      <File FileName="CostVarianceCalculationObject.cs" Line="37" Column="9" />
-      <File FileName="CalculationObject.cs" />
-      <File FileName="RecordObject.cs" />
-      <File FileName="ToolObject.cs" />
-      <File FileName="ToolInterface.cs" />
-      <File FileName="ToolType.cs" />
-      <File FileName="test2.cs" />
-      <File FileName="test1.cs" />
+      <File FileName="Execution.cs" Line="37" Column="80" />
+      <File FileName="SelectionObjectsCreation.cs" Line="86" Column="13" />
+      <File FileName="Project.cs" Line="227" Column="37" />
+      <File FileName="ToolObject.cs" Line="47" Column="26" />
+      <File FileName="RecordObject.cs" Line="100" Column="68" />
+      <File FileName="CostVarianceCalculationObject.cs" Line="81" Column="39" />
+      <File FileName="ScheduleVarianceCalculationObject.cs" Line="79" Column="39" />
+      <File FileName="VarianceCompletionCalculationObject.cs" Line="79" Column="39" />
+      <File FileName="CostPerformanceIndexCalcObject.cs" Line="80" Column="23" />
+      <File FileName="SchedulePerformanceIndexCalcObject.cs" Line="72" Column="14" />
+      <File FileName="ToolType.cs" Line="1" Column="1" />
+      <File FileName="KnowledgeArea.cs" Line="46" Column="9" />
+      <File FileName="Status.cs" Line="50" Column="1" />
+      <File FileName="ConnectionObjects.cs" Line="2" Column="1" />
+      <File FileName="SQLConnectionBuilder.cs" Line="37" Column="69" />
+      <File FileName="QueryBuilder.cs" Line="28" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BigSnowMan" expanded="True">
-            <Node name="BigSnowMan" expanded="True">
-              <Node name="CostVarianceCalculationObject.cs" selected="True" />
-            </Node>
+            <Node name="BigSnowMan" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -37,7 +33,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.BigSnowMan PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

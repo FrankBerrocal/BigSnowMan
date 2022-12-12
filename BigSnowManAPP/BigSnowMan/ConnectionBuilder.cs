@@ -17,36 +17,67 @@
 using System;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data.Common;
+using System.Data;
 
-namespace SQLConnectionBuilder
+namespace ConnectionBuilderObject
 {
 	public class ConnectionBuilder
 	{
-		public ConnectionBuilder(string _dataSource, string _userID, string _pass, string _catalog)
+
+        private string DataSource;
+        private string UserID;
+        private string Password;
+        private string InitialCatalog;
+        public SqlConnectionStringBuilder Builder;
+        public SqlConnection Connection;
+        string BuilderString;
+
+        public ConnectionBuilder(    string _dataSource,
+                                                string _userID,
+                                                string _pass,
+                                                string _catalog)
 		{
-			try
-			{
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = _dataSource;
-                builder.UserID = _userID;
-                builder.Password = _pass;
-                builder.InitialCatalog = _catalog;
-
-                // Connect to SQL
-                Console.Write("Connecting to SQL Server ... ");
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    connection.Close();
-                    connection.Open();
-                    Console.WriteLine("Connection Open.");
-                }
-
-             }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            DataSource = _dataSource;
+            UserID = _userID;
+            Password = _pass;
+            InitialCatalog = _catalog;
         }
+
+        public SqlConnection createConnection()
+        {
+
+                Builder = new SqlConnectionStringBuilder();
+                Builder.DataSource = DataSource;
+                Builder.UserID = UserID;
+                Builder.Password = Password;
+                Builder.InitialCatalog = InitialCatalog;
+                
+                BuilderString = Builder.ConnectionString;
+                Connection = new SqlConnection(BuilderString);
+
+                 return Connection;
+
+        }
+
+        public SqlConnection getConnection
+        {
+            get => Connection;
+        }
+
+        public string getBuilderString
+        {
+            get => BuilderString;
+        }
+
+
 	}
 }
-
+/*
+ * 
+ * 
+ * 
+ * References
+ * SQLConnection class: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection?view=dotnet-plat-ext-7.0
+ * 
+ */
