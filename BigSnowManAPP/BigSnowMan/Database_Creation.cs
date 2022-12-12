@@ -24,6 +24,7 @@ namespace TestSQLScript
         {
             try
             {
+                string messageText;
                 Console.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
 
                 // Build connection string
@@ -170,9 +171,6 @@ namespace TestSQLScript
                         int rowsAffected = command.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " Schedule schema created");
                     }
-
-
-
 
 
 
@@ -1300,10 +1298,286 @@ namespace TestSQLScript
                     }
 
 
+                    //Block #:   Roles *************************************************************
+
+                    //ROLE, PROJECT ANALYST, PROJECT SUPPORT
+                    Console.Write("Create Role Project Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+                    sb.Append("DROP ROLE IF EXISTS Project_Analyst; ");
+
+                    //role creation
+                    sb.Append("CREATE ROLE Project_Analyst; ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Role created");
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("Role creation error Project Analyst"+ e.Message);
+                        }
+                    }
+
+                    //ROLE, COST ANALYST, AREA SUPPORT
+                    Console.Write("Creating Role Project Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+                    sb.Append("DROP ROLE IF EXISTS Cost_Analyst; ");
+
+                    //role creation
+                    sb.Append("CREATE ROLE Cost_Analyst; ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Role created");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Role creation error Cost Analyst" + e.Message);
+                        }
+                    }
+
+                    //Block #:  Permissions *************************************************************
+
+
+                    //PERMISSIONS, PROJECT ANALYST.
+                    //User Project Analysts wants to provide support to Area Analysts, so that can update a project, read all information, 
+                    //and DML Cost Schema (except creation).
+
+                    Console.Write("Granting Permissions to Role Project Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("ALTER ROLE db_datareader ADD MEMBER  Project_Analyst;  ");
+                    sb.Append("GRANT SELECT, INSERT, UPDATE ON SCHEMA :: Cost TO Project_Analyst;  ");
+                    sb.Append("GRANT SELECT, INSERT, UPDATE ON SCHEMA :: Calculation TO Project_Analyst;  ");
+                    sb.Append("GRANT SELECT ON SCHEMA :: Project TO Project_Analyst;  ");
+                    sb.Append("GRANT SELECT, INSERT, UPDATE ON OBJECT :: Project.PJ_Project_tbl TO Project_Analyst; ");
+                    sb.Append("DENY UPDATE, INSERT, DELETE ON OBJECT :: Project.ST_Status_tbl TO Project_Analyst; ");
+                    sb.Append("DENY UPDATE, INSERT, DELETE ON OBJECT :: Project.PT_ProjectType_tbl TO Project_Analyst; ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Permissions granted");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error assigning permissions to Project Analyst" + e.Message);
+                        }
+                    }
+
+                    //PERMISSIONS, COST ANALYST.
+                    //User Cost Analyst wants to work on Cost related tables so that can 
+                    //DML except Create on Cost and Calculation Schemas, and can read Project Schema
+
+                    Console.Write("Granting Permissions to Role Cost Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("GRANT SELECT, INSERT ON SCHEMA :: Cost TO Cost_Analyst  ");
+                    sb.Append("GRANT SELECT, INSERT ON SCHEMA :: Calculation TO Cost_Analyst;  ");
+                    sb.Append("GRANT SELECT ON SCHEMA :: Project TO Cost_Analyst;  ");
+   
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Permissions granted");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error assigning permissions to Cost Analyst" + e.Message);
+                        }
+                    }
+
+                    //Block #:  Logins *************************************************************
+
+
+                    //LOGIN, PROJECT ANALYST.
+                    Console.Write("Creating loging for Project Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("CREATE LOGIN Analyst_JJones   ");
+                    sb.Append("         WITH PASSWORD = 'JJones1234'  ");
+                    sb.Append("         , DEFAULT_DATABASE = Ulysses ");
+
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Login created");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error creating Project Analyst login" + e.Message);
+                        }
+                    }
+
+
+                    //LOGIN, COST ANALYST
+                    Console.Write("Creating loging for Cost Analyst\n");
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("CREATE LOGIN Analyst_KBenton    ");
+                    sb.Append("         WITH PASSWORD = 'KBenton1234'  ");
+                    sb.Append("         , DEFAULT_DATABASE = Ulysses ");
+
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Login created");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error creating Cost Analyst login" + e.Message);
+                        }
+                    }
 
 
 
+                    //Block #:  Users *************************************************************
 
+
+                    //USER, PROJECT ANALYST.
+                    messageText = "Creating user for Project Analyst\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("CREATE USER JessicaJones   ");
+                    sb.Append("         FOR LOGIN Analyst_JJones;  ");
+                    sb.Append("REVERT;  ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Done");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error "+messageText+", " + e.Message);
+                        }
+                    }
+
+                    //USER, COST ANALYST.
+                    messageText = "Creating user for Cost Analyst\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("CREATE USER KimberBenton   ");
+                    sb.Append("         FOR LOGIN KimberBenton  ");
+                    sb.Append("         WITH DEFAULT_Schema = Cost;  ");
+                    sb.Append("REVERT;  ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Done");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error " + messageText + ", " + e.Message);
+                        }
+                    }
+
+
+                    //Block #:  Add users to roles *************************************************************
+
+
+                    //ADD MEMBER, PROJECT ANALYST.
+                    messageText = "Adding user to role\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("ALTER ROLE Project_Analyst ADD MEMBER JessicaJones;  ");
+                    sb.Append("REVERT;  ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Done");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error " + messageText + ", " + e.Message);
+                        }
+                    }
+
+                    //ADD MEMBER, COST ANALYST.
+                    messageText = "Adding user to role\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+                    databaseSelection();
+
+                    //role creation
+                    sb.Append("ALTER ROLE Cost_Analyst ADD MEMBER KimberBenton;  ");
+                    sb.Append("REVERT;  ");
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                        {
+                            int rowsAffected = command.ExecuteNonQuery();
+                            Console.WriteLine(rowsAffected + " Done");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Error " + messageText + ", " + e.Message);
+                        }
+                    }
 
 
 
