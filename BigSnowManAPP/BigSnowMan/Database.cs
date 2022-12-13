@@ -57,8 +57,8 @@ public class Database
                     String sql = "";
                     StringBuilder sb = new StringBuilder();
 
-
-
+                    sb.Append("REVERT; ");
+                    sb.Append("Use master ");
                     sb.Append("DROP DATABASE IF EXISTS [Ulysses];");
                     sb.Append("CREATE DATABASE [Ulysses];");
                     sql = sb.ToString();
@@ -97,17 +97,7 @@ public class Database
                     //Block #:  DBA creation
 
                     sb.Append("USE master; ");
-                    sb.Append("IF OBJECT_ID('PMOES_dbadmin') IS NOT NULL ");
-                    sb.Append("DROP LOGIN PMOES_dbadmin; ");
-
-                    Console.Write("Creation of Database admin user\n");
-
-
-
-                    sb.Append("CREATE LOGIN PMOES_dbadmin WITH PASSWORD=N'Lucy!nth3_5ky', ");
-                    sb.Append("DEFAULT_DATABASE = Ulysses; ");
-                    sb.Append("EXEC master..sp_addsrvrolemember @loginame = N'PMOES_dbadmin', @rolename = N'sysadmin'; ");
-                    sb.Append("CREATE USER JBenton FOR LOGIN PMOES_dbadmin; ");
+                    
 
 
 
@@ -200,7 +190,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.CV_CostVariance_tbl( ");
                     sb.Append("     CV_CostVariance_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     CV_CostVariance_Date DATE NOT NULL, ");
+                    sb.Append("     CV_CostVariance_Date DATETIME NOT NULL, ");
                     sb.Append("     CV_CostVariance_EarnedValue FLOAT NOT NULL, ");
                     sb.Append("     CV_CostVariance_ActualCost FLOAT NOT NULL, ");
                     sb.Append("     CV_CostVariance_Value FLOAT NOT NULL ");
@@ -237,7 +227,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.SV_ScheduleVariance_tbl( ");
                     sb.Append("     SV_ScheduleVariance_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     SV_ScheduleVariance_Date DATE NOT NULL, ");
+                    sb.Append("     SV_ScheduleVariance_Date DATETIME NOT NULL, ");
                     sb.Append("     SV_ScheduleVariance_EarnedValue FLOAT NOT NULL, ");
                     sb.Append("     SV_ScheduleVariance_PlannedValue FLOAT NOT NULL, ");
                     sb.Append("     SV_ScheduleVariance_Value FLOAT NOT NULL ");
@@ -273,7 +263,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.VAC_VarianceAtCompletion_tbl( ");
                     sb.Append("     VAC_VarianceAtCompletion_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     VAC_VarianceAtCompletion_Date DATE NOT NULL, ");
+                    sb.Append("     VAC_VarianceAtCompletion_Date DATETIME NOT NULL, ");
                     sb.Append("     VAC_VarianceAtCompletion_BudgetAtCompletion FLOAT NOT NULL, ");
                     sb.Append("     VAC_VarianceAtCompletion_EstimateAtCompletion FLOAT NOT NULL, ");
                     sb.Append("     VAC_VarianceAtCompletion_Value FLOAT NOT NULL ");
@@ -311,7 +301,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.CPI_CostPerformanceIndex_tbl( ");
                     sb.Append("     CPI_CostPerformanceIndex_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     CPI_CostPerformanceIndex_Date DATE NOT NULL, ");
+                    sb.Append("     CPI_CostPerformanceIndex_Date DATETIME NOT NULL, ");
                     sb.Append("     CPI_CostPerformanceIndex_EarnedValue FLOAT NOT NULL, ");
                     sb.Append("     CPI_CostPerformanceIndex_ActualCost  FLOAT NOT NULL, ");
                     sb.Append("     CPI_CostPerformanceIndex_Value  FLOAT NOT NULL, ");
@@ -346,7 +336,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.SPI_SchedulePerformanceIndex_tbl( ");
                     sb.Append("     SPI_SchedulePerformanceIndex_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     SPI_SchedulePerformanceIndex_Date DATE NOT NULL, ");
+                    sb.Append("     SPI_SchedulePerformanceIndex_Date DATETIME NOT NULL, ");
                     sb.Append("     SPI_SchedulePerformanceIndex_EarnedValue FLOAT NOT NULL, ");
                     sb.Append("     SPI_SchedulePerformanceIndex_PlannedValue  FLOAT NOT NULL, ");
                     sb.Append("     SPI_SchedulePerformanceIndex_Value  FLOAT NOT NULL ");
@@ -382,7 +372,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.EAC_EstimateAtCompletion_tbl( ");
                     sb.Append("     EAC_EstimateAtCompletion_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     EAC_EstimateAtCompletion_Date DATE NOT NULL, ");
+                    sb.Append("     EAC_EstimateAtCompletion_Date DATETIME NOT NULL, ");
                     sb.Append("     EAC_EstimateAtCompletion_BudgetAtCompletion FLOAT NOT NULL, ");
                     sb.Append("     EAC_EstimateAtCompletion_CostPerformanceIndex  FLOAT NOT NULL, ");
                     sb.Append("     EAC_EstimateAtCompletion_Value  FLOAT NOT NULL ");
@@ -418,7 +408,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.ETC_EstimateToComplete_tbl( ");
                     sb.Append("     ETC_EstimateToComplete_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     ETC_EstimateToComplete_Date DATE NOT NULL, ");
+                    sb.Append("     ETC_EstimateToComplete_Date DATETIME NOT NULL, ");
                     sb.Append("     ETC_EstimateToComplete_EstimateAtCompletion FLOAT NOT NULL, ");
                     sb.Append("     ETC_EstimateToComplete_ActualCost  FLOAT NOT NULL, ");
                     sb.Append("     ETC_EstimateToComplete_Value  FLOAT NOT NULL ");
@@ -454,7 +444,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.TCPI_ToCompletePerformanceIndex_tbl( ");
                     sb.Append("     TCPI_ToCompletePerformanceIndex_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     TCPI_ToCompletePerformanceIndex_Date DATE NOT NULL, ");
+                    sb.Append("     TCPI_ToCompletePerformanceIndex_Date DATETIME NOT NULL, ");
                     sb.Append("     TCPI_ToCompletePerformanceIndex_BudgetAtCompletion FLOAT NOT NULL, ");
                     sb.Append("     TCPI_ToCompletePerformanceIndex_EarnedValue FLOAT NOT NULL, ");
                     sb.Append("     TCPI_ToCompletePerformanceIndex_ActualCost  FLOAT NOT NULL, ");
@@ -491,7 +481,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.TC_TotalCost_tbl( ");
                     sb.Append("     TC_TotalCost_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     TC_TotalCost_Date DATE NOT NULL, ");
+                    sb.Append("     TC_TotalCost_Date DATETIME NOT NULL, ");
                     sb.Append("     TC_TotalCost_TotalHours FLOAT NOT NULL, ");
                     sb.Append("     TC_TotalHours_CostHour FLOAT NOT NULL, ");
                     sb.Append("     TC_TotalCost_Value FLOAT NOT NULL ");
@@ -526,7 +516,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.PIT_PowerInterest_tbl( ");
                     sb.Append("     PIT_PowerInterest_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     PIT_PowerInterest_Date DATE NOT NULL, ");
+                    sb.Append("     PIT_PowerInterest_Date DATETIME NOT NULL, ");
                     sb.Append("     PIT_PowerInterest_Power FLOAT NOT NULL, ");
                     sb.Append("     PIT_PowerInterest_Interest FLOAT NOT NULL, ");
                     sb.Append("     PIT_PowerInterest_Value INT NOT NULL ");
@@ -561,7 +551,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.PIF_PowerInfluence_tbl( ");
                     sb.Append("     PIF_PowerInfluence_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     PIF_PowerInfluence_Date DATE NOT NULL, ");
+                    sb.Append("     PIF_PowerInfluence_Date DATETIME NOT NULL, ");
                     sb.Append("     PIF_PowerInfluence_Power FLOAT NOT NULL, ");
                     sb.Append("     PIF_PowerInfluence_Influence FLOAT NOT NULL, ");
                     sb.Append("     PIF_PowerInfluence_Value INT NOT NULL ");
@@ -596,7 +586,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.II_InterestInfluence_tbl( ");
                     sb.Append("     II_InterestInfluence_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     II_InterestInfluence_Date DATE NOT NULL, ");
+                    sb.Append("     II_InterestInfluence_Date DATETIME NOT NULL, ");
                     sb.Append("     II_InterestInfluence_Power FLOAT NOT NULL, ");
                     sb.Append("     II_InterestInfluence_Influence FLOAT NOT NULL, ");
                     sb.Append("     II_InterestInfluence_Value INT NOT NULL ");
@@ -632,7 +622,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Calculation.PT_Priority_tbl( ");
                     sb.Append("     PT_Priority_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     PT_Priority_Date DATE NOT NULL, ");
+                    sb.Append("     PT_Priority_Date DATETIME NOT NULL, ");
                     sb.Append("     PT_Priority_Value INT NOT NULL ");
                     sb.Append("); ");
 
@@ -783,7 +773,7 @@ public class Database
 
                     //Block #:   Project Type *************************************************************
 
-                    //PROEJCT TYPE, PRIMARY TABLE, REFERENCE TYPE
+                    //PROJECT TYPE, PRIMARY TABLE, REFERENCE TYPE
                     Console.Write("Create table Project Type under Project schema\n");
                     sb.Clear();
 
@@ -825,7 +815,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Cost.CRC_CostRecord_tbl( ");
                     sb.Append("     CRC_CostRecord_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                    sb.Append("     CRC_CostRecord_Date DATE NOT NULL, ");
+                    sb.Append("     CRC_CostRecord_Date DATETIME NOT NULL, ");
                     sb.Append("     CRC_CostRecord_CV_CostVariance_ID INT NULL, ");
                     sb.Append("     CRC_CostRecord_SV_ScheduleVariance_ID INT NULL,");
                     sb.Append("     CRC_CostRecord_VAC_VarianceAtCompletion_ID INT NULL, ");
@@ -903,7 +893,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Cost.CRP_CostReport_tbl( ");
                     sb.Append("     CRP_CostReport_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
-                    sb.Append("     CRP_CostReport_Date DATE NOT NULL, ");
+                    sb.Append("     CRP_CostReport_Date DATETIME NOT NULL, ");
                     sb.Append("     CRC_CostReport_PJ_Project_ID INT NOT NULL, ");
                     sb.Append("     CRC_CostReport_KA_KnowledgeArea_ID INT NOT NULL ");
 
@@ -979,11 +969,11 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Schedule.WP_WorkPackage_tbl( ");
                     sb.Append("     WP_WorkPackage_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
-                    sb.Append("     WP_WorkPackage_Date DATE NOT NULL, ");
+                    sb.Append("     WP_WorkPackage_Date DATETIME NOT NULL, ");
                     sb.Append("     WP_WorkPackage_Level INT NOT NULL, ");
                     sb.Append("     WP_WorkPackage_WorkPackageSuperior_ID INT NULL, ");
-                    sb.Append("     WP_WorkPackage_StartDate DATE NOT NULL, ");
-                    sb.Append("     WP_WorkPackage_EndDate DATE NOT NULL, ");
+                    sb.Append("     WP_WorkPackage_StartDate DATETIME NOT NULL, ");
+                    sb.Append("     WP_WorkPackage_EndDate DATETIME NOT NULL, ");
                     sb.Append("     WP_WorkPackage_Name VARCHAR(20), ");
                     sb.Append("     WP_WorkPackage_Description VARCHAR(100), ");
                     sb.Append("     WP_WorkPackage_TC_TotalCost_ID INT NULL, ");
@@ -1038,7 +1028,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Schedule.WBS_WorkBreakdown_tbl( ");
                     sb.Append("     WBS_WorkBreakdown_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
-                    sb.Append("     WBS_WorkBreakdown_DATE DATE, ");
+                    sb.Append("     WBS_WorkBreakdown_DATE DATETIME, ");
                     sb.Append("     WBS_WorkBreakdown_PJ_Project_ID INT NOT NULL, ");
                     sb.Append("     WBS_WorkBreakdown_KA_KnowledgeArea_ID INT NOT NULL ");
 
@@ -1116,9 +1106,9 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Scope.RR_RequirementRecord_tbl( ");
                     sb.Append("     RR_RequirementRecord_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
-                    sb.Append("     RR_RequirementRecord_DATE DATE, ");
+                    sb.Append("     RR_RequirementRecord_DATE DATETIME, ");
                     sb.Append("     RR_RequirementRecord_Objective VARCHAR(100), ");
-                    sb.Append("     RR_RequirementRecord_StatusDate DATE, ");
+                    sb.Append("     RR_RequirementRecord_StatusDate DATETIME, ");
                     sb.Append("     RR_RequirementRecord_Version INT NOT NULL, ");
                     sb.Append("     RR_RequirementRecord_ST_Status_ID INT NOT NULL ");
 
@@ -1158,7 +1148,7 @@ public class Database
                     //table creation
                     sb.Append("CREATE TABLE Scope.TM_TraceabilityMatrix_tbl( ");
                     sb.Append("     TM_TraceabilityMatrix_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
-                    sb.Append("     TM_TraceabilityMatrix_DATE DATE, ");
+                    sb.Append("     TM_TraceabilityMatrix_DATE DATETIME, ");
                     sb.Append("     TM_Traceability_Matrix_PJ_Project_ID INT NOT NULL, ");
                     sb.Append("     TM_Traceability_Matrix_KA_KnowledgeArea_ID INT NOT NULL ");
 
@@ -1237,9 +1227,9 @@ public class Database
                     sb.Append("     PJ_Project_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,  ");
                     sb.Append("     PJ_Project_Name VARCHAR(20), ");
                     sb.Append("     PJ_Project_Description VARCHAR(100), ");
-                    sb.Append("     PJ_Project_StartDate DATE NOT NULL, ");
-                    sb.Append("     PJ_Project_ExpectedEndDate DATE NOT NULL, ");
-                    sb.Append("     PJ_Project_RealEndDate DATE NOT NULL, ");
+                    sb.Append("     PJ_Project_StartDate DATETIME NOT NULL, ");
+                    sb.Append("     PJ_Project_ExpectedEndDate DATETIME NOT NULL, ");
+                    sb.Append("     PJ_Project_RealEndDate DATETIME NOT NULL, ");
 
                     sb.Append("     PJ_Project_CRP_CostReport_ID INT NULL, ");
                     sb.Append("     PJ_Project_WBS_WorkBreakdown_ID INT NULL, ");
@@ -1617,11 +1607,93 @@ public class Database
                         }
                     }
 
+                    //Block #:   Insert data into Status *************************************************************
+
+                    //STATUS, PRIMARY TABLE, REFERENCE TYPE
+                     messageText = "Creating data for table Status under Project schema\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+
+                    databaseSelection();
+
+                    //table creation
+                    sb.Append("INSERT Project.ST_Status_tbl (ST_Status_Description) VALUES  ");
+                    sb.Append("                         ('Active'), ");
+                    sb.Append("                         ('Archived'), ");
+                    sb.Append("                         ('Cancelled'), ");
+                    sb.Append("                         ('Completed'), ");
+                    sb.Append("                         ('Draft'), ");
+                    sb.Append("                         ('On Hold'), ");
+                     sb.Append("                        ('Under Review'); ");
 
 
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                            {
+                                int rowsAffected = command.ExecuteNonQuery();
+                                Console.WriteLine(rowsAffected + " Status data inserted");
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Error " + messageText + ", " + e.Message);
+                            }
+                    }
 
 
-                    void databaseSelection()
+                    //Block #:   Insert data into Project Type *************************************************************
+
+                    //PROJECT TYPE, PRIMARY TABLE, REFERENCE TYPE
+                     messageText = "Creating data for table Project Type under Project schema\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+
+                    databaseSelection();
+
+                    //table creation
+                    sb.Append("INSERT Project.PT_ProjectType_tbl (PT_ProjectType_Description) VALUES  ");
+                    sb.Append("                         ('Technology'), ");
+                    sb.Append("                         ('Software'), ");
+                    sb.Append("                         ('Engineering'), ");
+                    sb.Append("                         ('Manufacturing'), ");
+                    sb.Append("                         ('Architecture'), ");
+                    sb.Append("                         ('Arts'), ");
+                    sb.Append("                         ('Agriculture'), ");
+                    sb.Append("                         ('Accounting'), ");
+                    sb.Append("                        ('Organizational'); ");
+
+
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                            {
+                                int rowsAffected = command.ExecuteNonQuery();
+                                Console.WriteLine(rowsAffected + " Project Type data inserted");
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Error " + messageText + ", " + e.Message);
+                            }
+                    }
+
+                    /*
+                
+
+
+                //table creation
+                sb.Append("CREATE TABLE Project.PT_ProjectType_tbl( ");
+                sb.Append("     PT_ProjectType_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
+                sb.Append("     PT_ProjectType_Description VARCHAR(50) NOT NULL ");
+                sb.Append("); ");
+
+                    */
+
+
+                void databaseSelection()
                     {
                         //calling use of specific database.
 

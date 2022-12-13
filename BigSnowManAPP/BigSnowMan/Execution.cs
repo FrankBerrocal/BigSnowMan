@@ -27,7 +27,8 @@ using ConnectionBuilderObject;
 using System.Text;
 using System.Data.SqlClient;
 using CommandBuilderObject;
-using TestSQLScript;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class Execution
 {
@@ -38,6 +39,9 @@ public class Execution
 
         //Database Ulysses = new Database();
 
+
+
+        
         //Connection for user DBA
         string DBA_DataSource = "localhost, 1440";
         string DBA_UserID = "sa";
@@ -48,102 +52,70 @@ public class Execution
         CommandBuilder DBA_command;
         SqlConnection DBA_Connection;
 
-        ConnectionBuilder DbaBuilder = new ConnectionBuilder(DBA_DataSource, DBA_UserID, DBA_Password, DBA_InitialCatalog);
+        ConnectionBuilder DBA_Builder = new ConnectionBuilder(DBA_DataSource, DBA_UserID, DBA_Password, DBA_InitialCatalog);
         
-        DBA_Connection = DbaBuilder.createConnection();
-        DBA_Connection = DbaBuilder.getConnection;
-        DBA_Connection = new SqlConnection(DbaBuilder.getBuilderString);
+        DBA_Connection = DBA_Builder.createConnection();
+        DBA_Connection = DBA_Builder.getConnection;
+        DBA_Connection = new SqlConnection(DBA_Builder.getBuilderString);
         DBA_Connection.Open();
         ValidateConnection(DBA_Connection, DBA_UserID);
 
-        DBA_command = new CommandBuilder();
-        DBA_command.createCommandBuilderBasic(dba_sql, DBA_Connection, dba_sb, DbaBuilder.getBuilderString);
+        DBA_command = new CommandBuilder(dba_sql, DBA_Connection, dba_sb, DBA_Builder.getBuilderString);
 
-        //Select project Table
-        DBA_command.selectDMLTableProjectQuery();
-
-        /*
+        
         //Connection for user Project Analyst
         string PA_DataSource = "localhost, 1440";
         string PA_UserID = "Analyst_JJones";
         string PA_Password = "JJones1234";
         string PA_InitialCatalog = "Ulysses";
-        String pa_sql = "";
-        StringBuilder pa_sb = new StringBuilder();
+        String PA_SQL = "";
+        StringBuilder PA_SB = new StringBuilder();
         CommandBuilder PA_command;
         SqlConnection PA_Connection;
-        ConnectionBuilder PA_Builder = new ConnectionBuilder(DBA_DataSource, DBA_UserID, DBA_Password, DBA_InitialCatalog);
+
+        ConnectionBuilder PA_Builder = new ConnectionBuilder(PA_DataSource, PA_UserID, PA_Password, PA_InitialCatalog);
 
         PA_Connection = PA_Builder.createConnection();
-        PA_Connection = PA_BuildergetConnection;
+        PA_Connection = PA_Builder.getConnection;
         PA_Connection = new SqlConnection(PA_Builder.getBuilderString);
         PA_Connection.Open();
-        ValidateConnection(PA_Connection PA_UserID );
+        ValidateConnection(PA_Connection, PA_UserID );
 
-        PA_command = new CommandBuilder();
-        PA_command.createCommandBuilderBasic(dba_sql, PA_Connection, pa_sb, PA_Builder.getBuilderString);
+        PA_command = new CommandBuilder(PA_SQL, PA_Connection, PA_SB, PA_Builder.getBuilderString);
 
-        //Select project Table
-        PA_command.selectDMLTableProjectQuery();
-
+ 
         //Connection for user Cost Analyst
         string CA_DataSource = "localhost, 1440";
-        string CA_UserID = "Analyst_JJones";
-        string CA_Password = "JJones1234";
+        string CA_UserID = "Analyst_KBenton";
+        string CA_Password = "KBenton1234";
         string CA_InitialCatalog = "Ulysses";
-        CommandBuilder DBA_command;
-        SqlConnection PA_Connection;
-        ConnectionBuilder Cost_Analyst_Builder = new ConnectionBuilder(DBA_DataSource, DBA_UserID, DBA_Password, DBA_InitialCatalog);
+        String CA_SQL = "";
+        StringBuilder CA_SB = new StringBuilder();
+        CommandBuilder CA_command;
+        SqlConnection CA_Connection;
 
-        DBA_Connection = DbaBuilder.createConnection();
-        DBA_Connection = DbaBuilder.getConnection;
-        DBA_Connection = new SqlConnection(DbaBuilder.getBuilderString);
-        DBA_Connection.Open();
-        ValidateConnection(DBA_Connection, DBA_UserID);
+        ConnectionBuilder CA_Builder = new ConnectionBuilder(CA_DataSource, CA_UserID, CA_Password, CA_InitialCatalog);
 
-        DBA_command = new CommandBuilder();
-        DBA_command.createCommandBuilderBasic(dba_sql, DBA_Connection, dba_sb, DbaBuilder.getBuilderString);
+        CA_Connection = CA_Builder.createConnection();
+        CA_Connection = CA_Builder.getConnection;
+        CA_Connection = new SqlConnection(CA_Builder.getBuilderString);
+        CA_Connection.Open();
+        ValidateConnection(CA_Connection, CA_UserID );
 
-        //Select project Table
-        DBA_command.selectDMLTableProjectQuery();
-        */
-
-        /*
-
-        //Preparing to send individual queries per user dba
-        String dba_sql = "";
-        StringBuilder dba_sb = new StringBuilder();
-        CommandBuilder dba_command = new CommandBuilder();*/
-
-        //Preparing to send individual queries per user project analyst
+        CA_command = new CommandBuilder(CA_SQL, CA_Connection, CA_SB, CA_Builder.getBuilderString);
 
 
-        //Preparing to send individual queries per user cost analyst
-        String ca_sql = "";
-        StringBuilder ca_sb = new StringBuilder();
 
 
-        dba_sb = testSelectDBA(dba_sb, dba_sql);
+
+
+
+
+
+
+
 
         
-
-
-      /*
-        ConnectionCommandObject DbaBuilder = new ConnectionCommandObject();
-        DbaBuilder.initializeConnectionCommandObject(DBA_DataSource,
-                                                                                DBA_UserID,
-                                                                                DBA_Password,
-                                                                                DBA_InitialCatalog,
-                                                                                dba_sql,
-                                                                                dba_sb);
-        */
-
-        //dba_command.createCommandBuilderBasic(dba_sql, DbaConnection, dba_sb);
-        //dba_command.selectDMLTableProjectQuery1();
-
-
-
-        /*
         //Creation of all persistent selection objects
         Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
         SelectionObjects _status = new SelectionObjects();
@@ -167,14 +139,49 @@ public class Execution
 
         string ProjectName = "Lighthouse";
         string ProjectDescription = "Accounting project for Nest Consultants";
-        var ProjectStartDate = new DateOnly(2022, 12, 08);
-        var ProjectExpEndDate = new DateOnly(2023, 12, 08);
+        var ProjectStartDate = new DateTime(2022, 12, 08);
+        var ProjectExpEndDate = new DateTime(2023, 12, 08);
         var ProjectRealEndDate = ProjectExpEndDate;
-        var StatusID = 4;  //active status as default
+        var StatusID = 1;  //active status as default  
         var ProjectTypeID = 4;  //active status as default
         var ToolTypeID= 0;  //cost report
         var KAreaID = 3; //cost
 
+
+         Task insertProjectDBA = new Task(() =>DBA_command.insertDMLTableProjectQuery(ProjectName,
+                                                                            ProjectDescription,
+                                                                            ProjectStartDate,
+                                                                            ProjectExpEndDate,
+                                                                            ProjectRealEndDate,
+                                                                            null,
+                                                                            StatusID,
+                                                                            Status,
+                                                                            ProjectTypeID,
+                                                                            Type,
+                                                                            ToolTypeID,
+                                                                            KArea,
+                                                                            KAreaID));
+        
+        //Select project Table
+        Task selectProjectDBA = new Task(() => DBA_command.selectDMLTableProjectQuery());
+
+        //Select project Table
+        Task selectProjectPA = new Task(() => PA_command.selectDMLTableProjectQuery());
+
+        //Select project Table
+        Task selectProjectCA = new Task(()=> CA_command.selectDMLTableProjectQuery());
+
+        insertProjectDBA.Start();
+        selectProjectDBA.Wait(1000);
+        selectProjectDBA.Start();
+        selectProjectPA.Wait(1000);
+        selectProjectPA.Start();
+        selectProjectCA.Wait(1000);
+        selectProjectCA.Start();
+
+
+
+        /*
 
         //Status and Type send as parameters
         ProjectObject Proyecto = new ProjectObject(  ProjectName,
@@ -198,14 +205,8 @@ public class Execution
         */
     }
 
-    
-    private static StringBuilder testSelectDBA(StringBuilder _sb, string _table)
-    {
-        _sb.Clear();
-        _sb.Append("SELECT PJ_Project_ID, PJ_Project_Name, PJ_Project_Description ");
-        _sb.Append("    FROM PJ_Project_tbl; ");
-        return _sb;
-    }
+
+
 
     private static void ValidateConnection(SqlConnection _connection, string _userID)
     {
@@ -222,6 +223,8 @@ public class Execution
             Console.WriteLine(_userID + " connection borken");
         }
     }
+
+
 }
 
 /*

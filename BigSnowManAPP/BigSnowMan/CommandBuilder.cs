@@ -20,7 +20,12 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Data;
 using System.Reflection.PortableExecutable;
-
+using TestSQLScript;
+using BigSnowMan;
+using Status;
+using Tool;
+using Project;
+using System.Data.SqlTypes;
 
 namespace CommandBuilderObject
 {
@@ -36,12 +41,13 @@ namespace CommandBuilderObject
 
 
 
-        public CommandBuilder()
+        public CommandBuilder(String _sql, SqlConnection _connection, StringBuilder _sb, string _connectionString)
 		{
-			
-		}
-
-
+            Connection = _connection;
+            SQL = _sql;
+            SB = _sb;
+            ConnectionString = _connectionString;
+        }
 
         public CommandBuilder(String _sql, SqlConnection _connection, StringBuilder _sb, List<SqlCommand> _statements)
         {
@@ -51,24 +57,32 @@ namespace CommandBuilderObject
 			Statements = _statements;
         }
 
-        public void createCommandBuilderBasic(String _sql, SqlConnection _connection, StringBuilder _sb, string _connectionString)
-        {
-            Connection = _connection;
-            SQL = _sql;
-            SB = _sb;
-            ConnectionString = _connectionString;
-        }
-
-
-        public void createDML()
+        public void insertDMLTableProjectQuery(string _name,
+                                                                    string _desc,
+                                                                    DateTime _startDate,
+                                                                    DateTime _expEndDate,
+                                                                    DateTime _realEndDate,
+                                                                    Dictionary<OptionObject<string>, int> _status,
+                                                                    int _statusID,
+                                                                    Dictionary<OptionObject<string>, int> _type,
+                                                                    int _typeID,
+                                                                    Dictionary<OptionObject<string>, int> _toolType,
+                                                                    int _toolTypeId,
+                                                                    Dictionary<OptionObject<string>, int> _toolKA,
+                                                                    int _toolKAid)
 		{
 
             Connection = new SqlConnection(ConnectionString);
             Connection.Open();
             ValidateConnection(Connection, "user");
 
-            SB.Append("SELECT PJ_Project_ID, PJ_Project_Name, PJ_Project_Description ");
-            SB.Append("     FROM PJ_Project_tbl; ");
+            SB.Clear();
+            SB.Append("USE Ulysses; ");
+            SB.Append("INSERT Project.PJ_Project_tbl ( ");
+            SB.Append("                         PJ_Project_Name, PJ_Project_Description, PJ_Project_StartDate, ");
+            SB.Append("                         PJ_Project_ExpectedEndDate, PJ_Project_RealEndDate, ");
+            SB.Append("                         PJ_Project_ST_Status_ID, PJ_Project_PT_ProjectType_ID ) VALUES ");
+            SB.Append("                         (@_name, @_desc, @_startDate, @_expEndDate, @_realEndDate, @_statusID, @_typeID); ");
             SQL = SB.ToString();
 			Command = new SqlCommand(SQL, Connection);
 
@@ -76,6 +90,22 @@ namespace CommandBuilderObject
 			{
                 try
                 {
+                    Command.Parameters.Add("@_name", SqlDbType.VarChar).Value = _name;
+
+                    Command.Parameters.Add("@_desc", SqlDbType.VarChar).Value = _desc;
+
+                    Command.Parameters.Add("@_startDate", SqlDbType.DateTime).Value = _startDate;
+
+                    Command.Parameters.Add("@_expEndDate", SqlDbType.Date).Value = _expEndDate;
+
+                    Command.Parameters.Add("@_realEndDate", SqlDbType.Date).Value=  _realEndDate;
+
+                    //Command.Parameters.Add("@_CostReport", SqlDbType.Int).Value = 0;   //this should be retrieved from SQL, after Cost Report has been created.  Egg and Chicken.
+
+                    Command.Parameters.Add("@_statusID", SqlDbType.Int).Value = _statusID;
+
+                    Command.Parameters.Add("@_typeID", SqlDbType.Int).Value = _typeID;
+
                     int rowsAffected = Command.ExecuteNonQuery();
                     if(rowsAffected == -1)
                         rowsAffected = 1;
@@ -83,22 +113,40 @@ namespace CommandBuilderObject
                 }
 			    catch(SqlException e)
                 {
-                    Console.WriteLine("SQL Error in createDML " +e.Message);
+                    Console.WriteLine("SQL Error in insertDMLTableProjectQuery() " + e.Message);
                 }
 
 			}
-		}
+            ProjectObject Proyecto = new ProjectObject(_name,
+                                                                                _desc,
+                                                                                _startDate,
+                                                                                _expEndDate,
+                                                                                _realEndDate,
+                                                                                _status,
+                                                                                _statusID,
+                                                                                _type,
+                                                                                _typeID,
+                                                                                _toolType,
+                                                                                _toolTypeId,
+                                                                                _toolKA,
+                                                                                _toolKAid);
+            Proyecto.ProjectInfoDisplay();
+        }
 
 
-		//select specific elements from the table Project (id, name, description)
-        public void selectDMLTableProjectQuery()
+        //select specific elements from the table Project (id, name, description)
+        public void selectDMLTableProjectQuery( )
+ 
         {
             Connection = new SqlConnection(ConnectionString);
             Connection.Open();
             ValidateConnection(Connection, "user");
 
+            
+            SB.Clear();
+            SB.Append("USE Ulysses; ");
             SB.Append("SELECT PJ_Project_ID, PJ_Project_Name, PJ_Project_Description ");
-            SB.Append("     FROM PJ_Project_tbl; ");
+            SB.Append("     FROM Project.PJ_Project_tbl; ");
             SQL = SB.ToString();
             Command = new SqlCommand(SQL, Connection);
 
@@ -110,7 +158,7 @@ namespace CommandBuilderObject
                     Console.WriteLine("{0}\t\t\t {1}\t\t {2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
                     while (reader.Read())
                     {
-                        Console.WriteLine("{0}\t\t {1}\t\t {2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                        Console.WriteLine("\t{0}\t\t\t {1}\t\t\t\t {2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
                     }
                 }
                 catch (SqlException e)
@@ -147,7 +195,7 @@ namespace CommandBuilderObject
  * 
  * Reference
  * Connection state:  https://stackoverflow.com/questions/18809537/sql-server-connection-gets-closed
- * 
+ * Date parse error, and Add method extension https://learn.microsoft.com/en-us/answers/questions/307663/failed-to-convert-parameter-value-from-a-datetimeo.html
  * 
  */
 

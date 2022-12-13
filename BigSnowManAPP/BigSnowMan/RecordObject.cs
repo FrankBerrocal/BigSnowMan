@@ -26,7 +26,7 @@ namespace Record
 
 		private int ToolObjectID;
         private int ID;
-		private DateOnly Date;
+		private DateTime Date;
 
         //Calculations
         CostVarianceCalculationObject CV;
@@ -43,7 +43,7 @@ namespace Record
         delegate SchedulePerformanceIndexCalculationObject SPIDelegate(int _id);
 
 
-        public RecordObject(int _toollobjectId, DateOnly _date)
+        public RecordObject(int _toollobjectId, DateTime _date)
 		{
             ID = _toollobjectId;
             Date = _date;
@@ -72,7 +72,7 @@ namespace Record
             set => ID = value;
         }
 
-        public DateOnly RecordDate
+        public DateTime RecordDate
         {
             get => Date;
             set => Date = value;
