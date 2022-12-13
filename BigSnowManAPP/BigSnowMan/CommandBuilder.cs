@@ -38,7 +38,7 @@ namespace CommandBuilderObject
 		private StringBuilder SB;
         private String ConnectionString;
         SqlDataReader reader;
-
+        private ToolObject CostReport;
 
 
         public CommandBuilder(String _sql, SqlConnection _connection, StringBuilder _sb, string _connectionString)
@@ -116,7 +116,9 @@ namespace CommandBuilderObject
                     Console.WriteLine("SQL Error in insertDMLTableProjectQuery() " + e.Message);
                 }
 
+
 			}
+            //reproduction of object and information in C#, same structure as SQL.
             ProjectObject Proyecto = new ProjectObject(_name,
                                                                                 _desc,
                                                                                 _startDate,
@@ -130,7 +132,7 @@ namespace CommandBuilderObject
                                                                                 _toolTypeId,
                                                                                 _toolKA,
                                                                                 _toolKAid);
-            Proyecto.ProjectInfoDisplay();
+            //Proyecto.ProjectInfoDisplay();
         }
 
 

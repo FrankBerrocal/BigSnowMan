@@ -36,20 +36,20 @@ namespace Project
         private ToolObject CostReport;
 
         //all selection objects
-        private int StatusID;
+        
         private Dictionary<OptionObject<string>, int> Status;
-        private int ProjectTypeID;
+        private int StatusID;
         private Dictionary<OptionObject<string>, int> Type;
+        private int ProjectTypeID;
+        private Dictionary<OptionObject<string>, int> ToolType;
         private int ToolTypeID;
-        private Dictionary<OptionObject<string>, int> ToolType; 
+        private Dictionary<OptionObject<string>, int> ToolKA;
         private int ToolKAID;
-        private Dictionary<OptionObject<string>, int> ToolKA;   
 
 
 
 
-
-        public ProjectObject(string _name,
+        public ProjectObject(  string _name,
                                         string _desc,
                                         DateTime _startDate,
                                         DateTime _expEndDate,
@@ -65,23 +65,24 @@ namespace Project
         {
             Name = _name;
             Description = _desc;
-            Type = _type;
             StartDate = _startDate;
             ExpEndDate = _expEndDate;
             RealEndDate = _realEndDate;
-            StatusID = _statusID;
             Status = _status;
-            ProjectTypeID = _typeID;
+            StatusID = _statusID;
             Type = _type;
+            ProjectTypeID = _typeID;
             ToolType = _toolType;
             ToolTypeID = _toolTypeId;
             ToolKA = _toolKA;
             ToolKAID = _toolKAid;
+            ProjectStatusID = StatusID;
+            Console.WriteLine(ProjectStatusID);
             CostReport = CreateCostReport();
 
             //this should be substituted by information from SQL Server
             CostReport.ProjectIDGS = 1;
-
+            ProjectInfoDisplay();
         }
 
         public int ProjectIDGS  //retrieve after insertion of data in SQL
@@ -202,7 +203,7 @@ namespace Project
 
         public string ProjectStatusDisplay()
         {
-            string statusName = Status.Keys.ElementAt(StatusID).Description;
+            string statusName = Status.Keys.ElementAt(ProjectStatusID).Description;
             return statusName;
         }
 
@@ -220,7 +221,7 @@ namespace Project
                                     ".\nCreated on: " + StartDate +
                                     ",\nwith expected end date: " + ExpEndDate +
                                     ".\nProject " + Name + "  is type " + ProjectTypeDisplay() +
-                                    ",\nand the current stats is " + ProjectStatusDisplay() +
+                                   ",\nand the current status is " + ProjectStatusDisplay() +
                                     "\n\nCost Report information: " +
                                     CostReport.displayToolInfo() +
                                     CostReport.getRecordLineObject().displayRecordInfo();
