@@ -158,10 +158,10 @@ namespace CommandBuilderObject
                 reader = Command.ExecuteReader();
                 try  //exclusive object, each select depends on the number of rows returned.
                 {
-                    Console.WriteLine("{0}\t\t\t {1}\t\t {2}\t\t\t\t\t{3}", reader.GetName(0), reader.GetName(1), reader.GetName(2), reader.GetName(3));
+                    Console.WriteLine("\n{0}\t\t\t {1}\t\t {2}\t\t\t\t\t{3}", reader.GetName(0), reader.GetName(1), reader.GetName(2), reader.GetName(3));
                     while (reader.Read())
                     {
-                        Console.WriteLine("\t{0}\t\t\t {1}\t\t{2}\t\t{3}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2),  reader.GetDateTime(3));
+                        Console.WriteLine("\t{0}\t\t\t {1}\t\t{2}\t\t{3}\n\n", reader.GetInt32(0), reader.GetString(1), reader.GetString(2),  reader.GetDateTime(3));
                     }
                 }
                 catch (SqlException e)
@@ -193,7 +193,7 @@ namespace CommandBuilderObject
                 reader = Command.ExecuteReader();
                 try  //exclusive object, each select depends on the number of rows returned.
                 {
-                    Console.WriteLine("\t{0}\t\t\t {1}", reader.GetName(0), reader.GetName(1));
+                    Console.WriteLine("\n\t{0}\t\t\t {1}", reader.GetName(0), reader.GetName(1));
                     while (reader.Read())
                     {
                         Console.WriteLine("\t{0}\t\t\t {1}", reader.GetInt32(0), reader.GetString(1));
