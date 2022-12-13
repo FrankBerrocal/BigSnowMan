@@ -132,7 +132,8 @@ namespace CommandBuilderObject
                                                                                 _toolTypeId,
                                                                                 _toolKA,
                                                                                 _toolKAid);
-            //Proyecto.ProjectInfoDisplay();
+            Console.WriteLine("Impresion de proyecto");
+            Console.WriteLine("\n\n"+Proyecto.ProjectInfoDisplay() +"\n\n"); 
         }
 
 

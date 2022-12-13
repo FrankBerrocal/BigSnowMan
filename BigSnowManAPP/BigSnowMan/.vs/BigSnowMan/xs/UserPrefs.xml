@@ -1,30 +1,29 @@
 ﻿<Properties StartupConfiguration="{21DB3074-631E-40A8-AC58-75DC83694E03}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.BigSnowMan PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Execution.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Project.cs">
     <Files>
-      <File FileName="Execution.cs" Line="37" Column="80" />
-      <File FileName="SelectionObjectsCreation.cs" Line="86" Column="13" />
-      <File FileName="Project.cs" Line="227" Column="37" />
-      <File FileName="ToolObject.cs" Line="47" Column="26" />
-      <File FileName="RecordObject.cs" Line="100" Column="68" />
-      <File FileName="CostVarianceCalculationObject.cs" Line="81" Column="39" />
-      <File FileName="ScheduleVarianceCalculationObject.cs" Line="79" Column="39" />
-      <File FileName="VarianceCompletionCalculationObject.cs" Line="79" Column="39" />
-      <File FileName="CostPerformanceIndexCalcObject.cs" Line="80" Column="23" />
-      <File FileName="SchedulePerformanceIndexCalcObject.cs" Line="72" Column="14" />
-      <File FileName="ToolType.cs" Line="1" Column="1" />
-      <File FileName="KnowledgeArea.cs" Line="46" Column="9" />
-      <File FileName="Status.cs" Line="50" Column="1" />
-      <File FileName="ConnectionObjects.cs" Line="2" Column="1" />
-      <File FileName="SQLConnectionBuilder.cs" Line="37" Column="69" />
-      <File FileName="QueryBuilder.cs" Line="28" Column="1" />
+      <File FileName="Execution.cs" Line="89" Column="44" />
+      <File FileName="CommandBuilder.cs" Line="118" Column="1" />
+      <File FileName="ConnectionBuilder.cs" Line="36" Column="16" />
+      <File FileName="ToolObject.cs" Line="126" Column="1" />
+      <File FileName="RecordObject.cs" Line="93" Column="13" />
+      <File FileName="ConnectionObjects.cs" Line="8" Column="6" />
+      <File FileName="testConnection.cs" Line="60" Column="62" />
+      <File FileName="Database.cs" Line="1664" Column="69" />
+      <File FileName="Database_Creation.cs" Line="1303" Column="21" />
+      <File FileName="Project.cs" Line="176" Column="34" />
+      <File FileName="Status.cs" Line="43" Column="13" />
+      <File FileName="ProjectType.cs" Line="19" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BigSnowMan" expanded="True">
-            <Node name="BigSnowMan" expanded="True" />
+            <Node name="BigSnowMan" expanded="True">
+              <Node name="Project.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -33,6 +32,5 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

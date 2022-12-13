@@ -36,7 +36,7 @@ namespace Project
         private ToolObject CostReport;
 
         //all selection objects
-        
+
         private Dictionary<OptionObject<string>, int> Status;
         private int StatusID;
         private Dictionary<OptionObject<string>, int> Type;
@@ -80,9 +80,10 @@ namespace Project
             Console.WriteLine(ProjectStatusID);
             CostReport = CreateCostReport();
 
+            
             //this should be substituted by information from SQL Server
             CostReport.ProjectIDGS = 1;
-            ProjectInfoDisplay();
+            
         }
 
         public int ProjectIDGS  //retrieve after insertion of data in SQL

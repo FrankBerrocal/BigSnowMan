@@ -36,7 +36,7 @@ public class Execution
 	static void Main(string[] args)
 	{
 
-        //Database Ulysses = new Database();
+        Database Ulysses = new Database();
 
 
 
@@ -114,6 +114,9 @@ public class Execution
         StatusObject StatusCreation = new StatusObject();
         Status = StatusCreation.CreateStatus();
         StatusCreation.DisplayStatus(Status); //display elements
+     
+
+
 
         Console.WriteLine("\nProject Type object\n");
         Dictionary<OptionObject<string>, int> Type = new Dictionary<OptionObject<string>, int>();
@@ -134,7 +137,7 @@ public class Execution
         ToolTypesCreation.DisplayTool(Tool);  //display elements
 
 
-        Console.WriteLine(Status.Keys.ElementAt(1).Description); 
+     
         //capture of information has been set ready for interaction with interface.
         //I decide to implement multiple tasks and the reproduction of those is not possible with UI.   I would have to work with 3 UIs to reproduce the
         //activity of 3 users at the same time.
@@ -146,7 +149,7 @@ public class Execution
         var ProjectStartDate = new DateTime(2022, 12, 08);
         var ProjectExpEndDate = new DateTime(2023, 12, 08);
         var ProjectRealEndDate = ProjectExpEndDate;
-        var StatusID = 1;  //active status as default  
+        var StatusID = 0;  //active status as default  
         var ProjectTypeID = 4;  //active status as default
         var ToolTypeID= 0;  //cost report
         var KAreaID = 3; //cost
@@ -157,11 +160,11 @@ public class Execution
                                                                            ProjectStartDate,
                                                                            ProjectExpEndDate,
                                                                            ProjectRealEndDate,
-                                                                           null,
-                                                                           StatusID,
                                                                            Status,
-                                                                           ProjectTypeID,
+                                                                           StatusID,
                                                                            Type,
+                                                                           ProjectTypeID,
+                                                                           Tool,
                                                                            ToolTypeID,
                                                                            KArea,
                                                                            KAreaID));
