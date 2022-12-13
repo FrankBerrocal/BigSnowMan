@@ -22,7 +22,6 @@ using Project;
 using Tool;
 using Record;
 using CalculationTool;
-using Selection;
 using ConnectionBuilderObject;
 using System.Text;
 using System.Data.SqlClient;
@@ -109,31 +108,36 @@ public class Execution
 
 
 
-
-
-
-
-
-
-        
         //Creation of all persistent selection objects
+        Console.WriteLine("\nStatus object\n");
         Dictionary<OptionObject<string>, int> Status = new Dictionary<OptionObject<string>, int>();
-        SelectionObjects _status = new SelectionObjects();
-        Status = _status.createSelectionObjectStatus();
+        StatusObject StatusCreation = new StatusObject();
+        Status = StatusCreation.CreateStatus();
+        StatusCreation.DisplayStatus(Status); //display elements
 
+        Console.WriteLine("\nProject Type object\n");
         Dictionary<OptionObject<string>, int> Type = new Dictionary<OptionObject<string>, int>();
-        SelectionObjects _type = new SelectionObjects();
-        Type = _type.createSelectionObjectType();
+        TypeObject TypeCreation = new TypeObject();
+        Type = TypeCreation.CreateType();
+        TypeCreation.DisplayType(Type); //display elements
 
+        Console.WriteLine("\nKnowledge Area object\n");
         Dictionary<OptionObject<string>, int> KArea = new Dictionary<OptionObject<string>, int>();
-        SelectionObjects _karea= new SelectionObjects();
-        KArea = _karea.createSelectionObjectKnowledgeArea();
+        KAreaObject KAreaCreation = new KAreaObject();
+        KArea = KAreaCreation.CreateKArea();
+        KAreaCreation.DisplayKArea(KArea);  //display elements
 
+        Console.WriteLine("\nTool object\n");
         Dictionary<OptionObject<string>, int> Tool = new Dictionary<OptionObject<string>, int>();
-        SelectionObjects _tool = new SelectionObjects();
-        Tool = _tool.createSelectionObjectTool();
+        ToolType ToolTypesCreation = new ToolType();
+        Tool = ToolTypesCreation.CreateToolType();
+        ToolTypesCreation.DisplayTool(Tool);  //display elements
 
 
+        Console.WriteLine(Status.Keys.ElementAt(1).Description); 
+        //capture of information has been set ready for interaction with interface.
+        //I decide to implement multiple tasks and the reproduction of those is not possible with UI.   I would have to work with 3 UIs to reproduce the
+        //activity of 3 users at the same time.
 
         Console.WriteLine("\nProject Definition\n");
 
@@ -148,19 +152,19 @@ public class Execution
         var KAreaID = 3; //cost
 
 
-         Task insertProjectDBA = new Task(() =>DBA_command.insertDMLTableProjectQuery(ProjectName,
-                                                                            ProjectDescription,
-                                                                            ProjectStartDate,
-                                                                            ProjectExpEndDate,
-                                                                            ProjectRealEndDate,
-                                                                            null,
-                                                                            StatusID,
-                                                                            Status,
-                                                                            ProjectTypeID,
-                                                                            Type,
-                                                                            ToolTypeID,
-                                                                            KArea,
-                                                                            KAreaID));
+        Task insertProjectDBA = new Task(() => DBA_command.insertDMLTableProjectQuery(ProjectName,
+                                                                           ProjectDescription,
+                                                                           ProjectStartDate,
+                                                                           ProjectExpEndDate,
+                                                                           ProjectRealEndDate,
+                                                                           null,
+                                                                           StatusID,
+                                                                           Status,
+                                                                           ProjectTypeID,
+                                                                           Type,
+                                                                           ToolTypeID,
+                                                                           KArea,
+                                                                           KAreaID));
         
         //Select project Table
         Task selectProjectDBA = new Task(() => DBA_command.selectDMLTableProjectQuery());

@@ -28,10 +28,10 @@ namespace Tool
 		private int ID;  //id in SQL, retrieved after creation, SQL Identity is on.
         private int ProjectID;
         private DateTime Date;
-        private int ToolTypeID;
         private RecordObject RecordLine;
 
         //selection objects
+        private int ToolTypeID;
         private Dictionary<OptionObject<string>, int> ToolType;  //name of entity in SQL
         private int ToolKAID;
         private Dictionary<OptionObject<string>, int> ToolKA;   //Knowledge Area
