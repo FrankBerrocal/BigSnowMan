@@ -149,7 +149,7 @@ public class Execution
         var ProjectStartDate = new DateTime(2022, 12, 08);
         var ProjectExpEndDate = new DateTime(2023, 12, 08);
         var ProjectRealEndDate = ProjectExpEndDate;
-        var StatusID = 0;  //active status as default  
+        var StatusID = 1;  //active status as default  
         var ProjectTypeID = 4;  //active status as default
         var ToolTypeID= 0;  //cost report
         var KAreaID = 3; //cost
@@ -179,37 +179,15 @@ public class Execution
         Task selectProjectCA = new Task(()=> CA_command.selectDMLTableProjectQuery());
 
         insertProjectDBA.Start();
-        selectProjectDBA.Wait(1000);
+        selectProjectDBA.Wait(500);
         selectProjectDBA.Start();
         selectProjectPA.Wait(1000);
         selectProjectPA.Start();
-        selectProjectCA.Wait(1000);
+        selectProjectCA.Wait(2000);
         selectProjectCA.Start();
 
+        PA_command.selectDMLTableKnowledgeAreaQuery();
 
-
-        /*
-
-        //Status and Type send as parameters
-        ProjectObject Proyecto = new ProjectObject(  ProjectName,
-                                                                            ProjectDescription,
-                                                                            ProjectStartDate,
-                                                                            ProjectExpEndDate,
-                                                                            ProjectRealEndDate,
-                                                                            Status,
-                                                                            StatusID,
-                                                                            Type,
-                                                                            ProjectTypeID,
-                                                                            Tool,
-                                                                            ToolTypeID,
-                                                                            KArea,
-                                                                            KAreaID);
-
-        Console.WriteLine(Proyecto.ProjectInfoDisplay());
-
-        DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
-        Proyecto.getCostReport().RecordLineCreation(2, _date);
-        */
     }
 
 

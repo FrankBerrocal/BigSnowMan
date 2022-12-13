@@ -20,7 +20,6 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Data;
 using System.Reflection.PortableExecutable;
-using TestSQLScript;
 using BigSnowMan;
 using Status;
 using Tool;
@@ -132,8 +131,9 @@ namespace CommandBuilderObject
                                                                                 _toolTypeId,
                                                                                 _toolKA,
                                                                                 _toolKAid);
-            Console.WriteLine("Impresion de proyecto");
-            Console.WriteLine("\n\n"+Proyecto.ProjectInfoDisplay() +"\n\n"); 
+            
+            Console.WriteLine("\n\n"+Proyecto.ProjectInfoDisplay() +"\n\n");  //project information display, same information as in Database.
+            //The system acts as a backup for the information on the database.
         }
 
 
@@ -148,7 +148,7 @@ namespace CommandBuilderObject
             
             SB.Clear();
             SB.Append("USE Ulysses; ");
-            SB.Append("SELECT PJ_Project_ID, PJ_Project_Name, PJ_Project_Description ");
+            SB.Append("SELECT PJ_Project_ID AS 'Project ID', PJ_Project_Name AS 'Project Name', PJ_Project_Description AS Description, PJ_Project_StartDate as Start  ");
             SB.Append("     FROM Project.PJ_Project_tbl; ");
             SQL = SB.ToString();
             Command = new SqlCommand(SQL, Connection);
@@ -158,10 +158,45 @@ namespace CommandBuilderObject
                 reader = Command.ExecuteReader();
                 try  //exclusive object, each select depends on the number of rows returned.
                 {
-                    Console.WriteLine("{0}\t\t\t {1}\t\t {2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
+                    Console.WriteLine("{0}\t\t\t {1}\t\t {2}\t\t\t\t\t{3}", reader.GetName(0), reader.GetName(1), reader.GetName(2), reader.GetName(3));
                     while (reader.Read())
                     {
-                        Console.WriteLine("\t{0}\t\t\t {1}\t\t\t\t {2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                        Console.WriteLine("\t{0}\t\t\t {1}\t\t{2}\t\t{3}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2),  reader.GetDateTime(3));
+                    }
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Command error " + e.Message);
+                }
+            }
+            Connection.Close();
+        }
+
+        //select specific elements from the table Project (id, name, description)
+        public void selectDMLTableKnowledgeAreaQuery()
+
+        {
+            Connection = new SqlConnection(ConnectionString);
+            Connection.Open();
+            ValidateConnection(Connection, "user");
+
+
+            SB.Clear();
+            SB.Append("USE Ulysses; ");
+            SB.Append("SELECT KA_KnowledgeArea_ID AS ID, KA_KnowledgeArea_Description AS 'Knowledge Areas' ");
+            SB.Append("     FROM Project.KA_KnowledgeArea_tbl; ");
+            SQL = SB.ToString();
+            Command = new SqlCommand(SQL, Connection);
+
+            using (Command)
+            {
+                reader = Command.ExecuteReader();
+                try  //exclusive object, each select depends on the number of rows returned.
+                {
+                    Console.WriteLine("\t{0}\t\t\t {1}", reader.GetName(0), reader.GetName(1));
+                    while (reader.Read())
+                    {
+                        Console.WriteLine("\t{0}\t\t\t {1}", reader.GetInt32(0), reader.GetString(1));
                     }
                 }
                 catch (SqlException e)

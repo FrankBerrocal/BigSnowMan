@@ -36,6 +36,7 @@ public class TypeObject
         OptionObject<string> Architecture = new OptionObject<string>("Architecture");
         OptionObject<string> Arts = new OptionObject<string>("Arts");
         OptionObject<string> Agriculture = new OptionObject<string>("Agriculture");
+        OptionObject<string> Accounting = new OptionObject<string>("Accounting");
         OptionObject<string> Organizational = new OptionObject<string>("Organizational");
 
 
@@ -46,7 +47,8 @@ public class TypeObject
         Type.Add(Architecture, 5);
         Type.Add(Arts, 6);
         Type.Add(Agriculture, 7);
-        Type.Add(Organizational, 8);
+        Type.Add(Accounting, 8);
+        Type.Add(Organizational, 9);
 
 
         return Type;

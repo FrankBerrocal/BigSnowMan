@@ -1680,17 +1680,42 @@ public class Database
                             }
                     }
 
-                    /*
-                
+                    //Block #:   Insert data into Knowledge Area *************************************************************
+
+                    //KNOWLEDGE AREA, PRIMARY TABLE, REFERENCE TYPE
+                     messageText = "Creating data for table Knowledge Area under Project schema\n";
+                    Console.Write(messageText);
+                    sb.Clear();
+
+                    databaseSelection();
+
+                    //table creation
+                    sb.Append("INSERT Project.KA_KnowledgeArea_tbl(KA_KnowledgeArea_Description) VALUES  ");
+                    sb.Append("                         ('Project Scope Management'), ");
+                    sb.Append("                         ('Project Time Management'), ");
+                    sb.Append("                         ('Project Cost Management'), ");
+                    sb.Append("                         ('Project Quality Management'), ");
+                    sb.Append("                         ('Project Human Resource Management'), ");
+                    sb.Append("                         ('Project Communications Management'), ");
+                    sb.Append("                         ('Project Risk Management'), ");
+                     sb.Append("                        ('Project Procurement Management'); ");
 
 
-                //table creation
-                sb.Append("CREATE TABLE Project.PT_ProjectType_tbl( ");
-                sb.Append("     PT_ProjectType_ID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY, ");
-                sb.Append("     PT_ProjectType_Description VARCHAR(50) NOT NULL ");
-                sb.Append("); ");
+                    //query sending for execution
+                    sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        try
+                            {
+                                int rowsAffected = command.ExecuteNonQuery();
+                                Console.WriteLine(rowsAffected + " Knowledge Area data inserted");
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Error " + messageText + ", " + e.Message);
+                            }
+                    }
 
-                    */
 
 
                 void databaseSelection()
@@ -1730,7 +1755,7 @@ public class Database
                 Console.WriteLine(e.ToString());
             }
 
-            Console.WriteLine("All done.");
+            Console.WriteLine("All done.\n\n");
 
         }
 
