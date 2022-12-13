@@ -27,7 +27,7 @@ namespace Tool
 	{
 		private int ID;  //id in SQL, retrieved after creation, SQL Identity is on.
         private int ProjectID;
-        private DateOnly Date;
+        private DateTime Date;
         private int ToolTypeID;
         private RecordObject RecordLine;
 
@@ -36,7 +36,7 @@ namespace Tool
         private int ToolKAID;
         private Dictionary<OptionObject<string>, int> ToolKA;   //Knowledge Area
 
-        public ToolObject(int _projectId, DateOnly _date, Dictionary<OptionObject<string>, int> _toolType, int _typeId, Dictionary<OptionObject<string>, int> _toolKA, int _toolKDid)
+        public ToolObject(int _projectId, DateTime _date, Dictionary<OptionObject<string>, int> _toolType, int _typeId, Dictionary<OptionObject<string>, int> _toolKA, int _toolKDid)
 		{
             ProjectID = _projectId;
             Date = _date;
@@ -62,7 +62,7 @@ namespace Tool
             set => ProjectID = value;
         }
 
-        public DateOnly ToolDateGS
+        public DateTime ToolDateGS
         {
             get => Date;
             set => Date = value;
@@ -92,7 +92,7 @@ namespace Tool
             set => ToolKA = value;
         }
 
-        public RecordObject RecordLineCreation(int _id, DateOnly _date)
+        public RecordObject RecordLineCreation(int _id, DateTime _date)
         {
             RecordObject _recordLine = new RecordObject(_id, _date);
             return _recordLine;

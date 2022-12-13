@@ -2,6 +2,7 @@
 using System.Text;
 using System.Data.SqlClient;
 
+//this dont belong to the project, reference only.
 namespace SqlServerSample
 {
     class Program2

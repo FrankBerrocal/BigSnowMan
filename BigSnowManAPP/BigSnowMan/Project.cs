@@ -30,9 +30,9 @@ namespace Project
         private int ID;  
         private string Name; 
         private string Description;
-        private DateOnly StartDate;
-        private DateOnly ExpEndDate;
-        private DateOnly RealEndDate;
+        private DateTime StartDate;
+        private DateTime ExpEndDate;
+        private DateTime RealEndDate;
         private ToolObject CostReport;
 
         //all selection objects
@@ -51,9 +51,9 @@ namespace Project
 
         public ProjectObject(string _name,
                                         string _desc,
-                                        DateOnly _startDate,
-                                        DateOnly _expEndDate,
-                                        DateOnly _readlEndDate,
+                                        DateTime _startDate,
+                                        DateTime _expEndDate,
+                                        DateTime _realEndDate,
                                         Dictionary<OptionObject<string>, int> _status,
                                         int _statusID,
                                         Dictionary<OptionObject<string>, int> _type,
@@ -68,7 +68,7 @@ namespace Project
             Type = _type;
             StartDate = _startDate;
             ExpEndDate = _expEndDate;
-            RealEndDate = _readlEndDate;
+            RealEndDate = _realEndDate;
             StatusID = _statusID;
             Status = _status;
             ProjectTypeID = _typeID;
@@ -81,9 +81,6 @@ namespace Project
 
             //this should be substituted by information from SQL Server
             CostReport.ProjectIDGS = 1;
-
-
-
 
         }
 
@@ -105,19 +102,19 @@ namespace Project
             set => Description = value;
         }
 
-        public DateOnly ProjectStartDateGS
+        public DateTime ProjectStartDateGS
         {
             get => StartDate;
             set => StartDate = value;
         }
 
-        public DateOnly ProjectExpectedEndDateGS
+        public DateTime ProjectExpectedEndDateGS
         {
             get => ExpEndDate;
             set => ExpEndDate = value;
         }
 
-        public DateOnly ProjectRealEndDateGS
+        public DateTime ProjectRealEndDateGS
         {
             get => RealEndDate;
             set => RealEndDate = value;
@@ -135,7 +132,7 @@ namespace Project
             set => CostReport.ProjectIDGS = value;
         }
 
-        private DateOnly CostReportGS_Date
+        private DateTime CostReportGS_Date
         {
             get => CostReport.ToolDateGS;
             set => CostReport.ToolDateGS = value;
@@ -193,7 +190,7 @@ namespace Project
 
        public ToolObject CreateCostReport()
         {
-            DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+            DateTime _date = DateTime.Now;
             ToolObject _costReport = new ToolObject(ID, _date, ToolType, ToolTypeID, ToolKA, ToolKAID);
             return _costReport;
         }
@@ -239,6 +236,7 @@ namespace Project
 /*
  * References
  * DateOnly.FromDateTime:  https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.fromdatetime?view=net-7.0
+ * All DateOnly replaced due to issues with DateTime in SQL, though the date fields were created as Date.
  * 
  * 
  * 
